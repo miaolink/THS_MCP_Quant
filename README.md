@@ -39,6 +39,8 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 | 「问财选市盈率小于 20 的票」 | `rh_market_wencai`、`rh_market_select_stocklist` |
 | 「切换到实盘模式」（需谨慎） | `rh_trade_mode_set` + `confirm_live` |
 
+完整话术与**全部 MCP 工具**示例见 **[AI交易示例.md](./AI交易示例.md)**。
+
 **推荐客户端（配置方式相同，合并 `rhths-trade` 即可）：**
 
 1. **OpenClaw / Claw** — 自主 Agent，本机 stdio 或局域网 HTTP 连交易机  
@@ -148,7 +150,7 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 
 1. 启动同花顺并登录  
 2. `rhths.exe health` → `ok: true`  
-3. **AI 交易**：配置 OpenClaw 或 Hermes Agent → [MCP使用说明.md](./MCP使用说明.md)  
+3. **AI 交易**：配置 OpenClaw 或 Hermes Agent → [MCP使用说明.md](./MCP使用说明.md) · 话术 [AI交易示例.md](./AI交易示例.md)  
 4. **量化脚本** → [CLI使用说明.md](./CLI使用说明.md)  
 5. 首次安装 → [快速开始.md](./快速开始.md)
 
@@ -158,7 +160,8 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 
 | 文档 | 内容 |
 |------|------|
-| [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供 Cursor / OpenClaw / Hermes 加载） |
+| [AI交易示例.md](./AI交易示例.md) | **OpenClaw / Hermes** 自然语言话术与全工具示例 |
+| [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供 OpenClaw / Hermes 加载） |
 | [MCP使用说明.md](./MCP使用说明.md) | **OpenClaw / Hermes Agent** 本机与局域网配置 |
 | [快速开始.md](./快速开始.md) | 安装检查 |
 | [CLI使用说明.md](./CLI使用说明.md) | 命令行参考 |
