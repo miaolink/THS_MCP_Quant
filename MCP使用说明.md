@@ -1,6 +1,9 @@
 # MCP 使用说明
+
 通过 **MCP（Model Context Protocol）**，各类 AI Agent 客户端可以调用同花顺交易与行情能力。  
 RHTHS 不绑定单一产品：**凡支持 MCP 的客户端均可使用**，配置结构相同。
+
+> **无需任何外部 API 授权**；**非 WinGUI 自动化** — 走同花顺进程内 **`ths_api` 标准调用**（高效、极速、稳定）。**不含任务逆向破解，不破解同花顺软件**。合规见 [README.md](./README.md#技术与合规说明合法使用)。Agent 速查见 [SKILL.md](./SKILL.md)。
 ---
 ## 一、适用客户端与两种部署
 ### 1.1 常见 MCP 客户端（均适用）
@@ -198,7 +201,7 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 ### 5.1 系统与模式
 | 工具 | 用途 |
 |------|------|
-| `rh_trade_health` | 检查网关、同花顺 API 是否就绪 |
+| `rh_trade_health` | 检查网关、同花顺 `ths_api` 是否就绪 |
 | `rh_trade_catalog` | 列出网关支持的路由 |
 | `rh_trade_mode_get` | 查看当前 **模拟 / 实盘** 默认模式 |
 | `rh_trade_mode_set` | 切换模式：`mode` = `simulate` 或 `live` |

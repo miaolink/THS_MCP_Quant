@@ -1,10 +1,10 @@
 # CLI 使用说明（rhths.exe）
 
-
-
 `rhths.exe` 是**本机**命令行客户端：通过安装目录旁的网关（默认 `http://127.0.0.1:19312`）访问**本机**同花顺。  
 
 **不支持**在未安装同花顺的其它电脑上直接运行 CLI 去连远程交易（请改用 [MCP 局域网模式](./MCP使用说明.md#三局域网--远程安装mcp-http)）。
+
+> **无需任何外部 API 授权**；**非 WinGUI 键鼠模拟** — CLI 经网关 **`ths_api` 标准调用**，极速稳定；**不含逆向破解、不破解同花顺**。合规见 [README.md](./README.md#技术与合规说明合法使用)。MCP 与 CLI 对照见 [SKILL.md](./SKILL.md)。
 
 
 
@@ -114,7 +114,7 @@ $rhths = "D:\allinpol\RHTHS\dist\rhths.exe"
 
 ```powershell
 
-rhths health          # 网关与同花顺 API 状态
+rhths health          # 网关与同花顺 ths_api 状态
 
 rhths version         # RHTHS 版本号
 
