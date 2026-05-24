@@ -211,7 +211,8 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | 工具 | 用途 |
 |------|------|
 | `rh_trade_users` | 资金账号列表 |
-| `rh_trade_account` | 资金 |
+| `rh_trade_account` | 资金（可选写日快照） |
+| `rh_trade_account_daily` | 资金日快照历史 |
 | `rh_trade_positions` | 持仓（含可卖数量） |
 | `rh_trade_orders_today` | 当日委托 |
 | `rh_trade_orders_history` | 历史委托（可 `start_date` / `end_date` / `code`） |
@@ -223,6 +224,7 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | `rh_trade_buy` | 买入 |
 | `rh_trade_sell` | 卖出 |
 | `rh_trade_cancel` | 撤单 |
+| `rh_trade_cancel_all` | 全部撤单 |
 | `rh_trade_invoke` | 原始命令（高级） |
 常用参数：`code`、`qty`、`price`（如 `zxjg` / `dsj3`）、`dry_run`、`confirm_live`。
 ### 5.4 行情与指标
@@ -234,7 +236,24 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | `rh_market_wencai` | 问财选股语句 |
 | `rh_market_select_stocklist` | 问财结果代码列表 |
 | `rh_indicator_list` / `rh_indicator_calc` | 指标列表与计算 |
-订阅类：`rh_market_reg_quote`、`rh_market_reg_kline`、`rh_market_wait_update` 等。完整列表见 [mcp.tools.json](./mcp.tools.json)。
+| `rh_market_timeshare` / `rh_market_depth` | 分时 / 盘口 |
+| `rh_market_kline_probe` / `rh_market_kline_15s` | K 线周期探测 / 15 秒 K |
+| `rh_market_stock5d` / `rh_market_wencai_detail` | 5 日因子 / 问财详情 |
+| `rh_market_moneyflow_probe` | 资金流探测 |
+| `rh_market_block_list` / `rh_market_block_stocks` | 板块 |
+订阅类：`rh_market_reg_quote`、`rh_market_reg_kline`、`rh_market_wait_update` 等。
+
+### 5.5 条件单、py/call、进程、自动交易审核
+
+| 工具 | 用途 |
+|------|------|
+| `rh_condition_*` | 条件单增删改查、`resume`（≈ 恢复策略） |
+| `rh_py_call` | 统一分发：`condition.*`、`market.*`、`trade.*` |
+| `rh_system_*` | 启动/停止 hexin、xiadan |
+| `rh_autotrading_*` | 本地 JSON 审核配置与队列（**非 MySQL**） |
+
+完整机读列表：[mcp.tools.json](./mcp.tools.json)。**不连接** thsQuant `:19090`，**不提供** MySQL 工具。
+
 ---
 ## 六、模拟下单与实盘
 ### 默认（建议）

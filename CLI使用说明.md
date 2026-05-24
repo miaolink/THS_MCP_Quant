@@ -98,7 +98,7 @@ $rhths = "D:\allinpol\RHTHS\dist\rhths.exe"
 
 |------|------|------|
 
-| `RHTHS_GATEWAY_URL` | `http://127.0.0.1:19312` | 网关地址（须指向**本机**交易网关） |
+| `RHTHS_GATEWAY_URL` | `http://127.0.0.1:19312` | 网关地址（须指向**本机** RhThsHost，**不是** 19090） |
 
 | `RHTHS_ALLOW_LIVE` | `0` | `1` 才允许实盘 |
 
@@ -200,53 +200,97 @@ rhths warmup
 
 ## 六、行情与指标
 
-
-
 ```powershell
-
 # 行情
-
 rhths market quote 603919
-
 rhths market price 603919 300033
-
 rhths market kline 603919 --period 1440 --length 30
-
+rhths market kline-15s 603919
+rhths market kline-probe 603919
+rhths market timeshare 603919
+rhths market depth 603919
 rhths market wencai "市盈率小于20"
-
+rhths market wencai "市盈率小于20" --detail
 rhths market screen "沪深A股;市盈率<30"
-
-
+rhths market stock5d schema
+rhths market stock5d factors 603919
+rhths market moneyflow-probe 603919
+rhths market blocks
+rhths market block-stocks --block 行业板块名
 
 # 订阅（需配合 wait-update）
-
 rhths market reg-quote 603919 300033
-
 rhths market reg-kline 603919 --period 1440 --length 30
-
 rhths market wait-update --timeout 0.5
-
 rhths market unreg-kline 603919
 
-
-
 # 指标
-
 rhths indicator list
-
 rhths indicator calc 603919 MACD
-
 ```
-
-
 
 子命令帮助：`rhths market --help`、`rhths indicator --help`
 
+---
 
+## 六点五、条件单与策略（进程内 ths_api）
+
+```powershell
+rhths condition schema
+rhths condition add --codelist 000001 --condition "quote[code]['price'] > 0" --action "pass"
+rhths condition resume --signal-id 20260524_00000001
+rhths condition pause --signal-id 20260524_00000001
+rhths condition delete --signal-id 20260524_00000001
+
+# Pine / UI 信号单（JSON 体）
+rhths condition run-json --body-json '{"type":"信号单","name":"测试",...}'
+
+# 统一动作分发（与 thsQuant py/call 语义类似，走 :19312）
+rhths py call --action condition.resume --params-json "{\"signal_id\":\"...\"}"
+rhths py call --action market.stock5d --params-json "{\"code\":\"300033\"}"
+```
 
 ---
 
+## 六点六、同花顺进程（system）
 
+```powershell
+rhths system status
+rhths system start-hexin
+rhths system stop-hexin
+rhths system start-xiadan
+rhths system stop-xiadan
+```
+
+路径来自 `%AppData%\RHTHS\settings.json`（GUI 可配置）。
+
+---
+
+## 六点七、资金日快照与全部撤单
+
+```powershell
+rhths account-daily --start-date 20250101 --end-date 20250131
+rhths cancel-all --dry-run
+```
+
+日快照保存在 `PythonLog\rhths\data\trade_account_daily.jsonl`（调用 `rhths account` 时默认也会追加当日记录）。
+
+---
+
+## 六点八、自动交易审核（本地 JSON，非 MySQL）
+
+```powershell
+rhths autotrading config-get
+rhths autotrading config-set --mode review
+rhths autotrading review-list --status pending
+rhths autotrading review-approve --review-id xxx
+rhths autotrading audit-logs --limit 100
+rhths autotrading exchange-orders
+```
+
+数据目录：`PythonLog\rhths\data\`（与网关日志同级）。
+
+---
 
 ## 七、下单与撤单
 
@@ -267,6 +311,7 @@ rhths sell 603919 --qty 100 --dry-run
 rhths buy 603919 --qty 100 --price zxjg --dry-run
 
 rhths cancel --scope all --dry-run
+rhths cancel-all --dry-run
 
 ```
 

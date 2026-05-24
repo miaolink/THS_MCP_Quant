@@ -37,6 +37,8 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 | 「今天有哪些委托」 | `rh_trade_orders_today` |
 | 「模拟买入 100 股某某，最新价」 | `rh_trade_buy`（`dry_run`） |
 | 「问财选市盈率小于 20 的票」 | `rh_market_wencai`、`rh_market_select_stocklist` |
+| 「恢复策略运行 / 条件单 resume」 | `rh_condition_resume`（需已有 `signal_id`） |
+| 「启动下单程序 xiadan」 | `rh_system_start_xiadan` |
 | 「切换到实盘模式」（需谨慎） | `rh_trade_mode_set` + `confirm_live` |
 
 完整话术与**全部 MCP 工具**示例见 **[AI交易示例.md](./AI交易示例.md)**。
@@ -93,9 +95,9 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 | 为 AI 单独开发交易接口 | **OpenClaw / Hermes Agent** 配 MCP 即可对话查仓、下单 |
 | 云端 API 与 PC 持仓不一致 | 走**本机同花顺内置 `ths_api`**，与软件里看到的一致 |
 
-**不需要：** 任何外部 API 开通、第三方云交易接口、迁移到其它交易系统。
+**不需要：** 任何外部 API 开通、第三方云交易接口、迁移到其它交易系统、**MySQL 或其它数据库同步**（RHTHS 不提供；属其它非标集成）。
 
-> 说明：文档中的 `ths_api` 指同花顺客户端进程内的 Python 交易接口，**不是**要你额外申请的「官方开放 API」。
+> **与旧 thsQuant 的关系：** RHTHS **不连接** `:19090` / `:18989`。若你曾用 thsQuant，请改用本机 **`http://127.0.0.1:19312`** 与 `rhths` / `rhths-mcp`；能力在 RhThsHost 内对齐，两套程序可并存但互不依赖。
 
 建议先用 **模拟（dry-run）** 验证 AI 与策略，再按需实盘（风险自负）。
 
@@ -110,7 +112,10 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 | **量化脚本（CLI）** | `rhths.exe` 供 PowerShell、计划任务、Python 等本机自动化 |
 | **交易查询** | 资金账号、资金、持仓、当日/历史委托 |
 | **下单与撤单** | 买入、卖出、撤单；默认模拟，实盘需 `confirm_live` |
-| **行情与选股** | 实时行情、K 线、问财、指标（如 MACD） |
+| **行情与选股** | 实时行情、K 线、分时、盘口、板块、问财、5 日因子、指标 |
+| **条件单 / 策略** | `ths.run` / `resume` 等（进程内信号引擎，经网关 `:19312`） |
+| **进程管理** | 启动/停止 `hexin.exe`、`xiadan.exe`（CLI/MCP/GUI） |
+| **自动交易审核** | 本地 JSON 配置与审核队列（可选，非 MySQL） |
 | **图形管理** | `rhths-gui.exe`：Hook、交易面板、激活、升级 |
 | **产品授权** | RHTHS 标准版/高级版（产品注册码，≠ 外部 API 授权）；标准版实盘有每日次数保护 |
 

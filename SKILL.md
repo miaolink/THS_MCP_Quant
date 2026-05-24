@@ -80,21 +80,24 @@ Templates: [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · Full 
 
 | Task | MCP tool | CLI equivalent |
 |------|----------|----------------|
-| Health | `rh_trade_health` | `rhths health` |
+| Health / routes | `rh_trade_health` / `rh_trade_catalog` | `rhths health` / `rhths catalog` |
+| hexin / xiadan | `rh_system_*` | `rhths system status` / `start-xiadan` … |
 | Accounts | `rh_trade_users` | `rhths users` |
-| Balance | `rh_trade_account` | `rhths account` |
+| Balance / daily | `rh_trade_account` / `rh_trade_account_daily` | `rhths account` / `account-daily` |
 | Positions | `rh_trade_positions` | `rhths positions` |
-| Today orders | `rh_trade_orders_today` | `rhths orders today` |
-| History orders | `rh_trade_orders_history` | `rhths orders history` |
-| Mode | `rh_trade_mode_get` / `rh_trade_mode_set` | (GUI settings.json; MCP preferred) |
-| Buy | `rh_trade_buy` | `rhths buy CODE --qty N --dry-run` |
-| Sell | `rh_trade_sell` | `rhths sell CODE --qty N --dry-run` |
-| Cancel | `rh_trade_cancel` | `rhths cancel --dry-run` |
-| Quote | `rh_market_quote` | `rhths market quote CODE` |
-| Wencai | `rh_market_wencai` | `rhths market wencai "query"` |
+| Today / history orders | `rh_trade_orders_today` / `rh_trade_orders_history` | `rhths orders today` / `history` |
+| Mode | `rh_trade_mode_get` / `rh_trade_mode_set` | GUI `settings.json` |
+| Buy / sell / cancel | `rh_trade_buy` / `sell` / `cancel` | `rhths buy` / `sell` / `cancel` |
+| Cancel all | `rh_trade_cancel_all` | `rhths cancel-all` |
+| Condition resume | `rh_condition_resume` | `rhths condition resume` |
+| Py dispatch | `rh_py_call` | `rhths py call --action …` |
+| Quote / K / wencai | `rh_market_*` | `rhths market …` |
+| Autotrading review | `rh_autotrading_*` | `rhths autotrading …` |
 | Indicator | `rh_indicator_calc` | `rhths indicator calc CODE MACD` |
 
-Full tool params: [mcp.tools.json](./mcp.tools.json) · CLI detail: [CLI使用说明.md](./CLI使用说明.md)
+**Not in scope:** MySQL sync, thsQuant `:19090`. Gateway only: `http://127.0.0.1:19312`.
+
+Full tool list: [mcp.tools.json](./mcp.tools.json) · CLI: [CLI使用说明.md](./CLI使用说明.md)
 
 ---
 
