@@ -21,7 +21,8 @@ RHTHS 不绑定单一产品：**凡支持 MCP 的客户端均可使用**，配�
 | **Zed** | 项目/用户 `settings.json` 中的 MCP |
 与 **OpenClaw** 同类的自主 Agent（含 **Hermes Agent**、自建 Agent 框架）只要支持 `command`+`stdio` 或 `url`+HTTP/SSE，即可按本文配置。
 **机读模板（本机 stdio）**：[mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json)  
-**工具清单（机读）**：[mcp.tools.json](./mcp.tools.json)
+**工具清单（机读）**：[mcp.tools.json](./mcp.tools.json)  
+**AI 一句话自动安装 MCP + Skill**：[AI自动安装MCP与SKill示例.md](./AI自动安装MCP与SKill示例.md)
 ### 1.2 本机 vs 局域网 / 远程
 | 模式 | 何时使用 | 安装章节 |
 |------|----------|----------|

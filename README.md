@@ -49,7 +49,7 @@ RHTHS **不走**市面上常见的「找窗口 → 模拟点击 → OCR 读屏�
 2. **Hermes Agent** — MCP Agent，本机命令或远程 URL  
 3. **Cursor**、Claude Desktop、Windsurf、Cline、Continue、Cherry Studio 等
 
-> 机读配置模板：[mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · 工具列表：[mcp.tools.json](./mcp.tools.json)
+**机读配置模板：** [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · 工具列表：[mcp.tools.json](./mcp.tools.json) · **AI 自动安装：** [AI自动安装MCP与SKill示例.md](./AI自动安装MCP与SKill示例.md)
 
 ```text
 你 ──对话──► OpenClaw / Hermes Agent ──MCP──► rhths-mcp.exe ──► 同花顺 (ths_api)
@@ -183,6 +183,7 @@ RHTHS 通过 `ths_api` 程序化下单时，**必须在 `xiadan.exe` 里完成�
 | [AI交易示例.md](./AI交易示例.md) | **OpenClaw / Hermes** 自然语言话术与全工具示例 |
 | [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供 OpenClaw / Hermes 加载） |
 | [MCP使用说明.md](./MCP使用说明.md) | **OpenClaw / Hermes Agent** 本机与局域网配置 |
+| [AI自动安装MCP与SKill示例.md](./AI自动安装MCP与SKill示例.md) | **一句话让 AI 自动安装 MCP + Skill**（本机 / 局域网） |
 | [快速开始.md](./快速开始.md) | 安装检查 |
 | [CLI使用说明.md](./CLI使用说明.md) | 命令行参考 |
 | [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) | MCP 配置模板 |
