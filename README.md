@@ -192,6 +192,7 @@ RHTHS 通过 `ths_api` 程序化下单时，**必须在 `xiadan.exe` 里完成�
 
 | 文档 | 内容 |
 |------|------|
+| [软件功能图.md](./软件功能图.md) | **控制台界面截图**（概览/交易/激活/设置/MCP 等 9 张功能说明） |
 | [AI交易示例.md](./AI交易示例.md) | **OpenClaw / Hermes** 自然语言话术与全工具示例 |
 | [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供 OpenClaw / Hermes 加载） |
 | [MCP使用说明.md](./MCP使用说明.md) | **OpenClaw / Hermes Agent** 本机与局域网配置 |
