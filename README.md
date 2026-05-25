@@ -5,7 +5,7 @@
 在线文档：[https://www.miaolink.cn/rhths/index.php](https://www.miaolink.cn/rhths/index.php) · MCP 配置详见 [MCP使用说明.md](./MCP使用说明.md)
 
 ## 说人话
-只要你原来在你的同花顺上可以正常交易的账户,不用开通任何权限,本交易网关安装即用,无需任何特殊设置
+只要你当前能在同花顺上可以正常交易的账户(含模拟),不用开通任何权限,本交易网关安装即用,无需任何特殊设置
 
 ## 技术路线：原生 `ths_api`，不是 WinGUI 自动化
 
