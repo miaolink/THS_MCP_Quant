@@ -1,6 +1,6 @@
 # RHTHS
 
-**同花顺 PC 用户的 AI 交易与量化网关** — **非传统 WinGUI 键鼠模拟**，采用同花顺进程内**原生 `ths_api`**，**高效、极速、稳定**；适配免费版 / 金融大师 / 远航版 / 券商定制版 / 独立下单等，**无需任何外部 API 授权**，安装即用。专为 **OpenClaw**、**Hermes Agent** 及 Cursor 做 AI 交易，并支持 **CLI** 量化脚本。
+**同花顺 PC 用户的 AI 交易与量化网关** — **非传统 WinGUI 键鼠模拟**，采用同花顺进程内**原生 `ths_api`**，**高效、极速、稳定**；适配免费版 / 金融大师 / 远航版 / 券商定制版 / 独立下单等，**无需任何外部 API 授权**，安装即用。专为 **OpenClaw**、**Hermes Agent** 及 Cursor Codex做 AI 交易，并支持 **CLI** 量化脚本。
 
 在线文档：[https://www.miaolink.cn/rhths/index.php](https://www.miaolink.cn/rhths/index.php) · MCP 配置详见 [MCP使用说明.md](./MCP使用说明.md)
 
