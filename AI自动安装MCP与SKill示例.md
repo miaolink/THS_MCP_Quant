@@ -1,6 +1,6 @@
 # AI 自动安装 MCP 与 Skill 示例
 
-> **你只需要两件事：** ① 复制下面「一句话」发给 AI；② 告诉 AI **MCP 服务 IP**。  
+> **你只需要两件事：** ① 复制下面「一句话」发给 AI；② 告诉 AI **MCP 服务 IP**。 
 > **安装步骤由 AI 自己学：** [GitHub — miaolink/THS_MCP_Quant](https://github.com/miaolink/THS_MCP_Quant)（与本地 `web/usermd` 文档一致）。
 
 ---
@@ -9,13 +9,13 @@
 
 | 你填的 IP | 含义 | AI 应采用的连接方式 |
 |-----------|------|---------------------|
-| **`127.0.0.1`** | AI 与交易在**同一台**装同花顺的电脑 | 本机 **stdio**（`rhths-mcp.exe` + `args: ["stdio"]`） |
+| **`127.0.0.1`** | AI 与交易在**同一台**装 THS 的电脑 | 本机 **stdio**（`rhths-mcp.exe` + `args: ["stdio"]`） |
 | **`192.168.x.x`**（如 `192.168.100.168`） | AI 在别的电脑，交易机在家/办公室局域网 | 远程 **HTTP**：`http://该IP:19310/mcp`（交易机须已开 `rhths-gui` 或 `rhths-mcp.exe http`） |
 
-> 交易机上的同花顺网关始终是 **`http://127.0.0.1:19312`**（仅交易进程内，与「MCP 服务 IP」不是同一个端口）。  
+> 交易机上的 THS 网关始终是 **`http://127.0.0.1:19312`**（仅交易进程内，与「MCP 服务 IP」不是同一个端口）。 
 > MCP 服务名固定：**`rhths-trade`**。
 
-**交易机前提（一次性）：** 同花顺已登录、RHTHS Hook 已部署、`rhths health` 正常；xiadan 快速交易 4 项须为「否」见 [README.md](./README.md#独立下单xiadanexe必设项唯一配置入口)。
+**交易机前提（一次性）：**THS 已登录、RHTHS 扩展已部署、`rhths health` 正常；xiadan 快速交易 4 项须为「否」见 [README.md](./README.md#独立下单xiadanexe必设项唯一配置入口)。
 
 ---
 
@@ -42,7 +42,7 @@
 
 ## 两个填好的例子（直接发）
 
-**本机（同花顺与 AI 同一台电脑）：**
+**本机（THS 与 AI 同一台电脑）：**
 
 ```text
 按 https://github.com/miaolink/THS_MCP_Quant 文档给我装 rhths-trade MCP 和 Skill，MCP 服务 IP=127.0.0.1，客户端=Hermes Agent，装完 rh_trade_health 自检。

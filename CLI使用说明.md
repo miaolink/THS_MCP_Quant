@@ -1,10 +1,10 @@
 # CLI 使用说明（rhths.exe）
 
-`rhths.exe` 是**本机**命令行客户端：通过安装目录旁的网关（默认 `http://127.0.0.1:19312`）访问**本机**同花顺。  
+`rhths.exe` 是**本机**命令行客户端：通过安装目录旁的网关（默认 `http://127.0.0.1:19312`）访问**本机**THS。 
 
-**不支持**在未安装同花顺的其它电脑上直接运行 CLI 去连远程交易（请改用 [MCP 局域网模式](./MCP使用说明.md#三局域网--远程安装mcp-http)）。
+**不支持**在未安装 THS 的其它电脑上直接运行 CLI 去连远程交易（请改用 [MCP 局域网模式](./MCP使用说明.md#三局域网--远程安装mcp-http)）。
 
-> **无需任何外部 API 授权**；**非 WinGUI 键鼠模拟** — CLI 经网关 **`ths_api` 标准调用**，极速稳定；**不含逆向破解、不破解同花顺**。合规见 [README.md](./README.md#技术与合规说明合法使用)。MCP 与 CLI 对照见 [SKILL.md](./SKILL.md)。
+> CLI 经本机网关调用 THS 进程内 **`ths_api`**（非读屏点选主路径）。第三方辅助工具，非 THS 官方产品。使用说明见 [README.md](./README.md#使用说明与合规提示)。MCP 与 CLI 对照见 [SKILL.md](./SKILL.md)。
 
 
 
@@ -20,9 +20,9 @@
 
 |------|--------|
 
-| 本机 PowerShell / 批处理 / 计划任务 | 在 Mac、Linux 或未装同花顺的 PC 上跑 `rhths.exe` |
+| 本机 PowerShell / 批处理 / 计划任务 | 在 Mac、Linux 或未装 THS 的 PC 上跑 `rhths.exe` |
 
-| 本机调试、对账、定时拉持仓 | 让云服务器直接执行交易（无同花顺则无网关） |
+| 本机调试、对账、定时拉持仓 | 让云服务器直接执行交易（无 THS 则无网关） |
 
 | 与 MCP 共用同一台「交易机」 | 替代 MCP 做跨机器 AI 对话（请用 MCP HTTP） |
 
@@ -36,7 +36,7 @@
 
 
 
-1. **同花顺**已在本机启动并登录  
+1. **THS** 已在本机启动并登录 
 
 2. `rhths.exe` 在 PATH 中，或使用完整路径，例如：
 
@@ -114,13 +114,13 @@ $rhths = "D:\allinpol\RHTHS\dist\rhths.exe"
 
 ```powershell
 
-rhths health          # 网关与同花顺 ths_api 状态
+rhths health # 网关与 THS ths_api 状态
 
-rhths version         # RHTHS 版本号
+rhths version # RHTHS 版本号
 
-rhths catalog         # 网关路由列表
+rhths catalog # 网关路由列表
 
-rhths license         # 授权/版本（标准版、高级版）信息
+rhths license # 授权/版本（标准版、高级版）信息
 
 ```
 
@@ -174,7 +174,7 @@ rhths positions
 
 rhths orders today
 
-rhths orders today --active-only    # 仅未完成
+rhths orders today --active-only # 仅未完成
 
 
 
@@ -252,7 +252,7 @@ rhths py call --action market.stock5d --params-json "{\"code\":\"300033\"}"
 
 ---
 
-## 六点六、同花顺进程（system）
+## 六点六、 THS 进程（system）
 
 ```powershell
 rhths system status
@@ -365,7 +365,7 @@ rhths buy 600000 --qty 100 --price zxjg --live --confirm
 
 
 
-**标准版**：实盘买入+卖出合计每天最多 **10 次**；超限会报错。  
+**标准版**：实盘买入+卖出合计每天最多 **10 次**；超限会报错。 
 
 **高级版**：在 `rhths-gui` 激活注册码后无次数限制。
 
@@ -435,11 +435,11 @@ rhths positions --pretty > pos.txt
 
 |------|------|
 
-| 连接拒绝 | 启动同花顺；GUI 部署 Hook 后重启 xiadan |
+| 连接拒绝 | 启动 THS ；GUI 部署扩展 后重启 xiadan |
 
 | `LIVE_BLOCKED` | 设置 `RHTHS_ALLOW_LIVE=1` 并加 `--live --confirm` |
 
-| 升级 Hook 后命令失效 | 完全退出 xiadan 再启动 |
+| 升级扩展 后命令失效 | 完全退出 xiadan 再启动 |
 
 | JSON 乱码 | 使用 `--pretty` 或 `ConvertFrom-Json` |
 
@@ -447,5 +447,5 @@ rhths positions --pretty > pos.txt
 
 
 
-安装与 Hook 部署见产品安装包说明；MCP 配置见 [MCP使用说明.md](./MCP使用说明.md)。
+安装与扩展部署见产品安装包说明；MCP 配置见 [MCP使用说明.md](./MCP使用说明.md)。
 

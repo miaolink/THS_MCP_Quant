@@ -1,7 +1,7 @@
 ---
 name: rhths-trade
 description: >-
-  Operate Tonghuashun (同花顺) PC trading via RHTHS gateway using MCP tools
+  Operate THS PC trading via RHTHS gateway using MCP tools
   (rhths-mcp) or CLI (rhths.exe). Use for OpenClaw or Hermes Agent with
   rhths-trade MCP, rh_trade_* tools, rhths CLI, positions, orders, dry-run/live.
 disable-model-invocation: false
@@ -11,14 +11,14 @@ disable-model-invocation: false
 
 ## Product (one paragraph)
 
-**RHTHS** bridges **同花顺 PC** to MCP/CLI via local gateway `http://127.0.0.1:19312`.  
-**Not WinGUI automation** — no simulated mouse/keyboard or window scraping. It uses **native in-process `ths_api`** (same as 同花顺 strategy scripts): **fast, stable, no third-party API quota**.  
-**No external API authorization** required. Install RHTHS, deploy Hook, log in to 同花顺, then **MCP** (OpenClaw / Hermes Agent) or **CLI** (scripts).
+**RHTHS** bridges **THS PC** to MCP/CLI via local gateway `http://127.0.0.1:19312`. 
+Primary path: in-process Python **`ths_api`** (same class of usage as strategy scripts), not screen scraping / click automation. 
+Install RHTHS, deploy extension, log in to THS (strategy/trading Python env must be available), then **MCP** (OpenClaw / Hermes Agent) or **CLI** (scripts).
 
-**Compliance:** No reverse-engineering or cracking of 同花顺; uses **standard in-process `ths_api` calls** only (same class as official strategy scripts). User must follow 同花顺/券商 terms. See [README.md § 技术与合规说明](./README.md#技术与合规说明合法使用).
+**Notice:** Third-party helper, **not** an official THS product. User must follow THS / 券商 terms and local law. See [README.md § 使用说明与合规提示](./README.md#使用说明与合规提示).
 
-**AI trading (priority):** OpenClaw or Hermes Agent → MCP `rhths-trade` → `rhths-mcp.exe`.  
-**Quant scripts:** `rhths.exe` on the **same Windows machine** as 同花顺.
+**AI trading (priority):** OpenClaw or Hermes Agent → MCP `rhths-trade` → `rhths-mcp.exe`. 
+**Quant scripts:** `rhths.exe` on the **same Windows machine** as THS.
 
 ---
 
@@ -36,13 +36,13 @@ Both share the same gateway and semantics. Default orders are **simulate** (`dry
 
 ## Preconditions (always check first)
 
-1. Windows + 同花顺 (or xiadan) **running and logged in**
-2. RHTHS Hook deployed (`rhths-gui.exe` → 安装/更新 Hook)
+1. Windows + THS (or xiadan) **running and logged in**
+2. RHTHS extension deployed (`rhths-gui.exe` → 安装/更新扩展)
 3. Health OK:
-   - MCP: call `rh_trade_health`
-   - CLI: `rhths health` → JSON `ok: true`, `data.ready: true`
+ - MCP: call `rh_trade_health`
+ - CLI: `rhths health` → JSON `ok: true`, `data.ready: true`
 
-If health fails: start 同花顺, redeploy Hook, restart xiadan.
+If health fails: start THS , redeploy extension, restart xiadan.
 
 ---
 
@@ -50,20 +50,20 @@ If health fails: start 同花顺, redeploy Hook, restart xiadan.
 
 **Server name:** `rhths-trade`
 
-**Local (stdio)** — AI and 同花顺 on same PC:
+**Local (stdio)** — AI and THS on same PC:
 
 ```json
 {
-  "mcpServers": {
-    "rhths-trade": {
-      "command": "D:\\path\\to\\dist\\rhths-mcp.exe",
-      "args": ["stdio"],
-      "env": {
-        "RHTHS_GATEWAY_URL": "http://127.0.0.1:19312",
-        "RHTHS_ALLOW_LIVE": "0"
-      }
-    }
-  }
+ "mcpServers": {
+ "rhths-trade": {
+ "command": "D:\\path\\to\\dist\\rhths-mcp.exe",
+ "args": ["stdio"],
+ "env": {
+ "RHTHS_GATEWAY_URL": "http://127.0.0.1:19312",
+ "RHTHS_ALLOW_LIVE": "0"
+ }
+ }
+ }
 }
 ```
 
@@ -105,9 +105,9 @@ Full tool list: [mcp.tools.json](./mcp.tools.json) · CLI: [CLI使用说明.md](
 
 1. **Default simulate** — `dry_run: true` or omit with mode `simulate`; never live unless user explicitly confirms risk.
 2. **Live requires:**
-   - Env `RHTHS_ALLOW_LIVE=1` on trading machine
-   - MCP: `confirm_live: true` on each write; or `rh_trade_mode_set` → `live`
-   - CLI: `--live --confirm` and `$env:RHTHS_ALLOW_LIVE = "1"`
+ - Env `RHTHS_ALLOW_LIVE=1` on trading machine
+ - MCP: `confirm_live: true` on each write; or `rh_trade_mode_set` → `live`
+ - CLI: `--live --confirm` and `$env:RHTHS_ALLOW_LIVE = "1"`
 3. **Standard edition:** live buy+sell combined **≤ 10 per day**; error `FREE_DAILY_LIMIT` → use simulate or upgrade (GUI 激活).
 4. **Read before write** — prefer `rh_trade_account` / `rh_trade_positions` before suggesting orders.
 5. **Codes** — 6-digit A-share codes; prices often `zxjg` (buy), `dsj3` (sell).
@@ -144,7 +144,7 @@ rhths buy 600000 --qty 100 --price zxjg --dry-run
 
 | Code / symptom | Action |
 |----------------|--------|
-| Connection failed | 同花顺 not running / not logged in; redeploy Hook |
+| Connection failed | THS not running / not logged in; redeploy extension |
 | `LIVE_BLOCKED` | `RHTHS_ALLOW_LIVE=0` or missing `confirm_live` |
 | `FREE_DAILY_LIMIT` | Standard edition daily live cap |
 | Remote MCP timeout | Firewall TCP 19310; ping `http://IP:19310/health` |
@@ -155,7 +155,7 @@ rhths buy 600000 --qty 100 --price zxjg --dry-run
 
 | File | Purpose |
 |------|---------|
-| [README.md](./README.md) | Product intro, 同花顺 editions, no external API |
+| [README.md](./README.md) | Product intro, THS editions, no external API |
 | [快速开始.md](./快速开始.md) | Install checklist |
 | [MCP使用说明.md](./MCP使用说明.md) | OpenClaw / Hermes / LAN HTTP |
 | [CLI使用说明.md](./CLI使用说明.md) | All `rhths` subcommands |
@@ -173,11 +173,11 @@ rhths buy 600000 --qty 100 --price zxjg --dry-run
 遵循 [OpenClaw Skills](https://documentation.openclaw.ai/tools/skills)（AgentSkills 目录规范）：
 
 1. 创建技能目录，例如：
-   - 本机共享：`~/.openclaw/skills/rhths-trade/`
-   - 或工作区：`<你的工作区>/skills/rhths-trade/`
+ - 本机共享：`~/.openclaw/skills/rhths-trade/`
+ - 或工作区：`<你的工作区>/skills/rhths-trade/`
 2. 将本文件保存为该目录下的 **`SKILL.md`**（保留顶部 `name` / `description` frontmatter）。
 3. **MCP：** 把 [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) 里的 **`mcpServers.rhths-trade`** 合并进 OpenClaw 的 MCP 配置（标准 `mcpServers` JSON，键名 `rhths-trade`）。
-4. 交易机已安装 RHTHS、Hook 已部署、同花顺已登录；将 `__RHTHS_DIST__` 换为 `rhths-mcp.exe` 绝对路径。
+4. 交易机已安装 RHTHS、扩展已部署、 THS 已登录；将 `__RHTHS_DIST__` 换为 `rhths-mcp.exe` 绝对路径。
 5. 重载 MCP / 重启 OpenClaw；在对话中验证 **`rh_trade_health`**。
 
 可选：在 frontmatter 增加单行 `metadata`（OpenClaw 用于依赖检查），例如要求本机存在 `rhths-mcp.exe`：
@@ -193,7 +193,7 @@ metadata: {"openclaw":{"requires":{"bins":["rhths-mcp.exe"]},"os":["win32"]}}
 **① Skill（供 Agent 阅读的交易规范）**
 
 ```text
-~/.hermes/skills/rhths-trade/SKILL.md   ← 复制本文件
+~/.hermes/skills/rhths-trade/SKILL.md ← 复制本文件
 ```
 
 **② MCP（注册 `rhths-trade` 工具，编辑 `~/.hermes/config.yaml`）**
@@ -202,24 +202,24 @@ metadata: {"openclaw":{"requires":{"bins":["rhths-mcp.exe"]},"os":["win32"]}}
 
 ```yaml
 mcp_servers:
-  rhths-trade:
-    command: "D:/path/to/dist/rhths-mcp.exe"
-    args: ["stdio"]
-    env:
-      RHTHS_GATEWAY_URL: "http://127.0.0.1:19312"
-      RHTHS_ALLOW_LIVE: "0"
-    timeout: 120
-    connect_timeout: 60
+ rhths-trade:
+ command: "D:/path/to/dist/rhths-mcp.exe"
+ args: ["stdio"]
+ env:
+ RHTHS_GATEWAY_URL: "http://127.0.0.1:19312"
+ RHTHS_ALLOW_LIVE: "0"
+ timeout: 120
+ connect_timeout: 60
 ```
 
 局域网 HTTP（AI 在其它电脑，交易机常开 `rhths-mcp.exe http`）：
 
 ```yaml
 mcp_servers:
-  rhths-trade:
-    url: "http://192.168.1.100:19310/mcp"
-    timeout: 120
-    connect_timeout: 60
+ rhths-trade:
+ url: "http://192.168.1.100:19310/mcp"
+ timeout: 120
+ connect_timeout: 60
 ```
 
 > Hermes 规定：每个 server **只能**使用 `command`（stdio）**或** `url`（HTTP），不能同时填写。

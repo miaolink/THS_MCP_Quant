@@ -1,9 +1,9 @@
 # AI 交易示例（OpenClaw · Hermes Agent）
 
-在 **OpenClaw** 或 **Hermes Agent** 中配置 MCP 服务 **`rhths-trade`** 后，用自然语言即可驱动**本机已登录**的同花顺账户。
+在 **OpenClaw** 或 **Hermes Agent** 中配置 MCP 服务 **`rhths-trade`** 后，用自然语言即可驱动**本机已登录**的 THS 账户。
 
-- **默认模拟下单**（`dry_run` / 模式 `simulate`），不会真实成交。  
-- **实盘**须环境变量 `RHTHS_ALLOW_LIVE=1`，且每笔写操作带 **`confirm_live: true`**，风险自负。  
+- **默认模拟下单**（`dry_run` / 模式 `simulate`），不会真实成交。 
+- **实盘**须环境变量 `RHTHS_ALLOW_LIVE=1`，且每笔写操作带 **`confirm_live: true`**，风险自负。 
 - 配置方法见 [MCP使用说明.md](./MCP使用说明.md)、[SKILL.md](./SKILL.md)。
 
 ---
@@ -12,7 +12,7 @@
 
 | 你可以对 AI 说 | MCP 工具 |
 |----------------|----------|
-| 「先检查 RHTHS 和同花顺是否正常」 | `rh_trade_health` |
+| 「先检查 RHTHS 和 THS 是否正常」 | `rh_trade_health` |
 | 「hexin 和 xiadan 在跑吗？」 | `rh_system_status` |
 | 「现在是模拟还是实盘模式？」 | `rh_trade_mode_get` |
 
@@ -22,7 +22,7 @@
 
 | 你可以对 AI 说 | MCP 工具 | 说明 / 常用参数 |
 |----------------|----------|-----------------|
-| 「网关和同花顺 API 就绪吗？」 | `rh_trade_health` | 返回网关版本、`ths_api` 是否可用 |
+| 「网关和 THS API 就绪吗？」 | `rh_trade_health` | 返回网关版本、`ths_api` 是否可用 |
 | 「列出网关支持哪些接口」 | `rh_trade_catalog` | 查看 HTTP 路由列表（约 50+ 条） |
 | 「hexin / xiadan 是否在运行？」 | `rh_system_status` | `hexin_running`、`xiadan_running`、配置路径 |
 | 「当前是模拟还是实盘？」 | `rh_trade_mode_get` | 与 GUI 共用 `%APPDATA%\RHTHS\settings.json` |
@@ -31,10 +31,10 @@
 
 **示例对话：**
 
-> 用户：帮我看一下 RHTHS 是否正常，并告诉我现在是模拟还是实盘。  
+> 用户：帮我看一下 RHTHS 是否正常，并告诉我现在是模拟还是实盘。 
 > AI：调用 `rh_trade_health` → `rh_trade_mode_get`，用自然语言汇总结果。
 
-> 用户：同花顺主程序和下单程序都在跑吗？  
+> 用户： THS 主程序和下单程序都在跑吗？ 
 > AI：`rh_system_status`，说明 hexin / xiadan 运行状态及 exe 路径。
 
 ---
@@ -56,13 +56,13 @@
 
 **示例对话：**
 
-> 用户：帮我看下资金和持仓，重点看 603919 还能卖多少。  
+> 用户：帮我看下资金和持仓，重点看 603919 还能卖多少。 
 > AI：`rh_trade_account` → `rh_trade_positions`，解读可卖数量。
 
-> 用户：列出我今天所有买入委托。  
+> 用户：列出我今天所有买入委托。 
 > AI：`rh_trade_orders_today`，筛选买入方向。
 
-> 用户：对比一下最近一周每天的总资产变化。  
+> 用户：对比一下最近一周每天的总资产变化。 
 > AI：`rh_trade_account_daily`，`start_date`/`end_date` 设为近 7 日，汇总 `total_asset` 等字段。
 
 ---
@@ -87,13 +87,13 @@
 
 **示例对话：**
 
-> 用户：模拟买入 100 股贵州茅台，用最新价。  
+> 用户：模拟买入 100 股贵州茅台，用最新价。 
 > AI：`rh_trade_buy`，`code`: `600519`，`qty`: `100`，`price`: `zxjg`，`dry_run`: `true`。
 
-> 用户：把我持仓里 603919 可卖数量的一半模拟卖掉。  
+> 用户：把我持仓里 603919 可卖数量的一半模拟卖掉。 
 > AI：先 `rh_trade_positions` 读 `sellable_qty`，再 `rh_trade_sell`（模拟）。
 
-> 用户：今天所有挂单先模拟全部撤掉。  
+> 用户：今天所有挂单先模拟全部撤掉。 
 > AI：`rh_trade_cancel_all`，`dry_run`: `true`。
 
 ---
@@ -111,7 +111,7 @@
 
 **示例对话：**
 
-> 用户：我已在 GUI 打开实盘并确认风险，请实盘卖出 100 股 603919，对手价三档。  
+> 用户：我已在 GUI 打开实盘并确认风险，请实盘卖出 100 股 603919，对手价三档。 
 > AI：确认环境后 `rh_trade_sell`，`dry_run`: `false`，`confirm_live`: `true`。
 
 ---
@@ -144,22 +144,22 @@
 
 **订阅类典型流程：**
 
-1. `rh_market_reg_quote` 或 `rh_market_reg_kline`  
-2. 循环 `rh_market_wait_update` 获取推送  
+1. `rh_market_reg_quote` 或 `rh_market_reg_kline` 
+2. 循环 `rh_market_wait_update` 获取推送 
 3. 结束用 `rh_market_unreg_quote` / `rh_market_unreg_kline`
 
 **示例对话：**
 
-> 用户：问财找市盈率小于 20、市值大于 100 亿的票，把代码列出来。  
+> 用户：问财找市盈率小于 20、市值大于 100 亿的票，把代码列出来。 
 > AI：`rh_market_select_stocklist`，`query`: `沪深A股;市盈率<20;市值>100亿`。
 
-> 用户：看下 603919 最近 20 根日 K 大概走势。  
+> 用户：看下 603919 最近 20 根日 K 大概走势。 
 > AI：`rh_market_kline`，`code`: `603919`，`period`: `1440`，`length`: `20`。
 
-> 用户：300033 最近 5 个交易日的量价和 MACD 因子帮我拉一下。  
+> 用户：300033 最近 5 个交易日的量价和 MACD 因子帮我拉一下。 
 > AI：`rh_market_stock5d`，`code`: `300033`。
 
-> 用户：603919 现在分时和五档盘口一起看下。  
+> 用户：603919 现在分时和五档盘口一起看下。 
 > AI：`rh_market_timeshare` + `rh_market_depth`，`code`: `603919`。
 
 ---
@@ -174,29 +174,29 @@
 
 **示例对话：**
 
-> 用户：603919 的 MACD 金叉了吗？帮我算 MACD 并简单解读。  
+> 用户：603919 的 MACD 金叉了吗？帮我算 MACD 并简单解读。 
 > AI：`rh_indicator_calc`（`indicator`: `MACD`），结合返回数据说明（不构成投资建议）。
 
 ---
 
-## 七、同花顺进程（system）
+## 七、 THS 进程（system）
 
 | 你可以对 AI 说 | MCP 工具 | 说明 |
 |----------------|----------|------|
 | 「hexin 和 xiadan 在不在跑？」 | `rh_system_status` | 只读，返回进程状态与 exe 路径 |
-| 「启动同花顺主程序」 | `rh_system_start_hexin` | 已在跑则跳过 |
+| 「启动 THS 主程序」 | `rh_system_start_hexin` | 已在跑则跳过 |
 | 「停止 hexin」 | `rh_system_stop_hexin` | 结束所有 hexin 进程 |
 | 「启动下单程序 xiadan」 | `rh_system_start_xiadan` | 路径来自 GUI 设置 |
 | 「停止 xiadan」 | `rh_system_stop_xiadan` | 结束所有 xiadan 进程 |
 
-> 路径配置在 `%AppData%\RHTHS\settings.json`，GUI 可修改。**停止 xiadan 后再部署 Hook**，部署完需重启 xiadan。
+> 路径配置在 `%AppData%\RHTHS\settings.json`，GUI 可修改。**停止 xiadan 后再部署扩展**，部署完需重启 xiadan。
 
 **示例对话：**
 
-> 用户：帮我启动 xiadan，然后检查网关是否就绪。  
+> 用户：帮我启动 xiadan，然后检查网关是否就绪。 
 > AI：`rh_system_start_xiadan` → `rh_trade_health`，汇报 xiadan 与 `ths_api` 状态。
 
-> 用户：收盘后帮我停掉 hexin 和 xiadan。  
+> 用户：收盘后帮我停掉 hexin 和 xiadan。 
 > AI：`rh_system_stop_xiadan` → `rh_system_stop_hexin`，再 `rh_system_status` 确认。
 
 ---
@@ -217,14 +217,14 @@
 
 **示例对话：**
 
-> 用户：给 600000 加一个简单条件：价格大于 0 就 pass，看看返回的 signal_id。  
+> 用户：给 600000 加一个简单条件：价格大于 0 就 pass，看看返回的 signal_id。 
 > AI：`rh_condition_add`，`codelist`: `600000`，`condition`: `quote[code]['price'] > 0`，`action_code`: `pass`。
 
-> 用户：把 signal_id 20260524_00000001 的策略恢复运行。  
-> AI：`rh_condition_resume`，`signal_id`: `20260524_00000001`。  
+> 用户：把 signal_id 20260524_00000001 的策略恢复运行。 
+> AI：`rh_condition_resume`，`signal_id`: `20260524_00000001`。 
 > 或等价：`rh_py_call`，`action`: `condition.resume`，`params`: `{"signal_id":"20260524_00000001"}`。
 
-> 用户：用 py/call 查一下 300033 的 5 日因子。  
+> 用户：用 py/call 查一下 300033 的 5 日因子。 
 > AI：`rh_py_call`，`action`: `market.stock5d`，`params`: `{"code":"300033"}`。
 
 ---
@@ -246,13 +246,13 @@
 
 **示例对话：**
 
-> 用户：看一下自动交易是不是人工审核模式，并列出现有待审条目。  
+> 用户：看一下自动交易是不是人工审核模式，并列出现有待审条目。 
 > AI：`rh_autotrading_config_get` → `rh_autotrading_review_list`，`status`: `pending`。
 
-> 用户：通过 review_id abc123，备注「已人工确认」。  
+> 用户：通过 review_id abc123，备注「已人工确认」。 
 > AI：`rh_autotrading_review_approve`，`review_id`: `abc123`，`note`: `已人工确认`。
 
-> 用户：今天自动交易相关的委托和审计记录帮我汇总。  
+> 用户：今天自动交易相关的委托和审计记录帮我汇总。 
 > AI：`rh_autotrading_exchange_orders` + `rh_autotrading_audit_logs`，文字归纳。
 
 ---
@@ -319,12 +319,12 @@
 
 | 现象 | 处理 |
 |------|------|
-| 工具调用失败 / 连接错误 | 同花顺是否已登录；`rh_trade_health`；Hook 是否部署 |
+| 工具调用失败 / 连接错误 | THS 是否已登录；`rh_trade_health`；扩展是否已部署 |
 | `rh_system_*` 找不到 exe | GUI 设置里配置 hexin / xiadan 路径 |
 | 条件单无 `signal_id` | 先 `rh_condition_add` 或 `run_json`，从返回里取 id |
 | `LIVE_BLOCKED` | 未设 `RHTHS_ALLOW_LIVE=1` 或未传 `confirm_live` |
 | `FREE_DAILY_LIMIT` | 标准版当日实盘次数已满，改模拟或升级高级版 |
-| 问财/行情为空 | 同花顺行情模块是否可用；语句是否合法 |
+| 问财/行情为空 | THS 行情模块是否可用；语句是否合法 |
 | autotrading 列表为空 | 确认 `execution_mode`；数据在 `PythonLog\rhths\data\` |
 
 更多配置与排障：[MCP使用说明.md](./MCP使用说明.md) · [快速开始.md](./快速开始.md)
