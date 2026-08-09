@@ -2,8 +2,8 @@
 name: rhths-trade
 description: >-
   Operate THS PC trading via RHTHS gateway using MCP tools
-  (rhths-mcp) or CLI (rhths.exe). Use for OpenClaw or Hermes Agent with
-  rhths-trade MCP, rh_trade_*/rh_market_* locally first; rh_fuyao_* for
+  (rhths-mcp) or CLI (rhths.exe). Prefer WorkBuddy, Codex, or Hermes Agent with
+  rhths-trade MCP; also OpenClaw / Cursor. rh_trade_*/rh_market_* locally first; rh_fuyao_* for
   HiThink Financial-API (fuyao) cloud data when local data is missing.
   Prefer dry-run; require confirm_live for live trades.
 disable-model-invocation: false
@@ -13,14 +13,13 @@ disable-model-invocation: false
 
 ## Product (one paragraph)
 
-**RHTHS** bridges **THS PC** to MCP/CLI via local gateway `http://127.0.0.1:19312`. 
-Primary path: in-process Python **`ths_api`** (same class of usage as strategy scripts), not screen scraping / click automation. 
-Optional cloud data: GUI **API** tab → fuyao Key → MCP `rh_fuyao_*` / CLI `rhths fuyao` (prefer local for overlapping quotes/trades).
-Install RHTHS, deploy extension, log in to THS (strategy/trading Python env must be available), then **MCP** (OpenClaw / Hermes Agent) or **CLI** (scripts).
+**RHTHS** is an **independent AI trading gateway**: MCP/CLI unified entry so Agents, quant strategies and tools can reach **local logged-in THS** trading/quotes, plus fused data nodes. Design goal: **let AI actually connect to trading**.
 
-**Notice:** MCP/CLI unified entry on your PC. Cloud research data uses **Tonghuashun Financial Data Service** official standard API ([fuyao.aicubes.cn](https://fuyao.aicubes.cn/)); **users apply and keep their own API token**. Trading uses your own logged-in THS account/environment. Follow service terms, 券商 rules, and local law. See [README.md § 使用说明与合规提示](./README.md#使用说明与合规提示).
+**We do not sell or resell market data.** Cloud research data uses **Tonghuashun Financial Data Service** official API ([fuyao.aicubes.cn](https://fuyao.aicubes.cn/)); **users apply and keep their own token**. RHTHS value = **multi-node fusion + one maintainable entry for AI**. Author billing focus: **technical consulting / remote deploy & integration**—not a data package. Prefer local `rh_market_*`/`rh_trade_*` for quotes/trades; `rh_fuyao_*` when cloud research is needed.
 
-**AI trading (priority):** OpenClaw or Hermes Agent → MCP `rhths-trade` → `rhths-mcp.exe`. 
+**Notice:** Independent third-party gateway—**not** an official Tonghuashun/broker product; **does not sell data**. Cloud research = user-owned fuyao Token forwarded to official API. Trading = user's local logged-in THS only (not a cloud trade API). AI output is **not** investment advice. Author services focus on **tech consulting / remote deploy**. See [README § 关系声明](./README.md#关系声明与责任边界法律风险切割).
+
+**AI trading (priority):** WorkBuddy → Codex → Hermes Agent → MCP `rhths-trade` → `rhths-mcp.exe` (also OpenClaw / Cursor).
 **Quant scripts:** `rhths.exe` on the **same Windows machine** as THS.
 
 ---
@@ -29,7 +28,7 @@ Install RHTHS, deploy extension, log in to THS (strategy/trading Python env must
 
 | Use | When |
 |-----|------|
-| **MCP** | User talks to OpenClaw or Hermes Agent; natural-language trading assistant |
+| **MCP** | User talks to WorkBuddy / Codex / Hermes (or OpenClaw / Cursor); natural-language trading assistant |
 | **CLI** | PowerShell, cron, Python `subprocess`, batch files on **trading PC** |
 | **MCP HTTP** | AI on **another PC** on LAN; trading PC runs `rhths-mcp.exe http` |
 

@@ -1,6 +1,6 @@
 {
  "_comment": "RHTHS MCP — 本机 stdio。将 __RHTHS_DIST__ 替换为 rhths-mcp.exe 所在目录（含末尾反斜杠），合并到客户端 mcpServers。",
- "_comment_clients": "适用：Cursor、OpenClaw/Claw、Hermes Agent 等。第三方辅助工具，非 THS 官方产品；以本机 THS 已可用的策略/交易环境为准。",
+ "_comment_clients": "优先：WorkBuddy → Codex → Hermes Agent；亦可 OpenClaw/Claw、CodeBuddy、Cursor 等。第三方辅助工具，非 THS 官方产品；以本机 THS 已可用的策略/交易环境为准。",
  "_comment_skill": "Agent 融合指南见同目录 SKILL.md",
  "_comment_local_only": "stdio 仅适用于 AI 与交易在同一台 Windows；跨机器请用 HTTP，见 MCP使用说明.md 第三节。",
  "_comment_remote_example": "局域网远程示例（在客户端 mcp.json，交易机 IP 换成实际值，交易机须 rhths-mcp.exe http --sse）：",

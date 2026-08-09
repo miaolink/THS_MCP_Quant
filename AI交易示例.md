@@ -1,6 +1,6 @@
-# AI 交易示例（OpenClaw · Hermes Agent）
+# AI 交易示例（WorkBuddy · Codex · Hermes Agent）
 
-在 **OpenClaw** 或 **Hermes Agent** 中配置 MCP 服务 **`rhths-trade`** 后，用自然语言即可驱动**本机已登录**的 THS 账户。
+在 **WorkBuddy**、**Codex** 或 **Hermes Agent** 中配置 MCP 服务 **`rhths-trade`** 后，用自然语言即可驱动**本机已登录**的 THS 账户（亦可 OpenClaw / Cursor 等；优先顺序与购买页一致）。
 
 - **默认模拟下单**（`dry_run` / 模式 `simulate`），不会真实成交。 
 - **实盘**须环境变量 `RHTHS_ALLOW_LIVE=1`，且每笔写操作带 **`confirm_live: true`**，风险自负。 

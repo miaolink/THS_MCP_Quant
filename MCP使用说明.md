@@ -7,19 +7,27 @@ RHTHS 不绑定单一产品：**凡支持 MCP 的客户端均可使用**，配�
 ---
 ## 一、适用客户端与两种部署
 ### 1.1 常见 MCP 客户端（均适用）
-以下客户端只需在各自的 MCP 配置里合并 **`rhths-trade`** 节点（见下文），无需 RHTHS 单独适配：
+
+以下客户端只需在各自的 MCP 配置里合并 **`rhths-trade`** 节点（见下文），无需 RHTHS 单独适配。
+
+**优先顺序（与购买页 / README 一致）：** WorkBuddy → Codex → Hermes Agent；亦可 OpenClaw / Cursor 等。
+
 | 客户端 | 典型配置文件位置 |
 |--------|------------------|
-| **Cursor** | `%USERPROFILE%\.cursor\mcp.json` |
+| **WorkBuddy**（首选） | WorkBuddy 设置中的 MCP / `mcpServers` |
+| **Codex**（次选） | Codex MCP 配置 |
+| **Hermes Agent**（第三优先） | Hermes 的 MCP 服务器配置 |
 | **OpenClaw / Claw** | Claw 设置中的 MCP / `mcpServers` |
-| **Hermes Agent** | Hermes 的 MCP 服务器配置 |
+| **CodeBuddy** | CodeBuddy MCP 设置 |
+| **Cursor** | `%USERPROFILE%\.cursor\mcp.json` |
 | **Claude Desktop** | `%APPDATA%\Claude\claude_desktop_config.json` |
 | **Windsurf** | Windsurf MCP 设置 |
 | **Cline** | VS Code 扩展 MCP 配置 |
 | **Continue** | `config.json` 中 `mcpServers` |
 | **Cherry Studio** | 设置 → MCP 服务器 |
 | **Zed** | 项目/用户 `settings.json` 中的 MCP |
-与 **OpenClaw** 同类的自主 Agent（含 **Hermes Agent**、自建 Agent 框架）只要支持 `command`+`stdio` 或 `url`+HTTP/SSE，即可按本文配置。
+
+凡支持 `command`+`stdio` 或 `url`+HTTP/SSE 的 Agent / AI 编程客户端，均可按本文配置。
 **机读模板（本机 stdio）**：[mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) 
 **工具清单（机读）**：[mcp.tools.json](./mcp.tools.json) 
 **AI 一句话自动安装 MCP + Skill**：[AI自动安装MCP与SKill示例.md](./AI自动安装MCP与SKill示例.md)

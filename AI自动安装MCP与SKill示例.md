@@ -21,7 +21,7 @@
 
 ## 一句话安装（复制即用）
 
-把 **`【MCP服务IP】`** 换成 `127.0.0.1` 或你的交易机局域网 IP（如 `192.168.100.168`）；**`【客户端】`** 换成 OpenClaw / Hermes / Cursor 等。
+把 **`【MCP服务IP】`** 换成 `127.0.0.1` 或你的交易机局域网 IP（如 `192.168.100.168`）；**`【客户端】`** 换成 WorkBuddy / Codex / Hermes / Cursor 等。
 
 ```text
 请打开并学习 GitHub 仓库 https://github.com/miaolink/THS_MCP_Quant ，按其中的 MCP使用说明.md、mcp.tools.json、mcp.server.rhths-trade.json、SKILL.md 自动帮我完成 rhths-trade 的 MCP 安装和 Agent Skill 安装。
@@ -45,13 +45,13 @@
 **本机（THS 与 AI 同一台电脑）：**
 
 ```text
-按 https://github.com/miaolink/THS_MCP_Quant 文档给我装 rhths-trade MCP 和 Skill，MCP 服务 IP=127.0.0.1，客户端=Hermes Agent，装完 rh_trade_health 自检。
+按 https://github.com/miaolink/THS_MCP_Quant 文档给我装 rhths-trade MCP 和 Skill，MCP 服务 IP=127.0.0.1，客户端=WorkBuddy，装完 rh_trade_health 自检。
 ```
 
 **局域网（交易机 IP 示例）：**
 
 ```text
-按 https://github.com/miaolink/THS_MCP_Quant 文档给我装 rhths-trade MCP 和 Skill，MCP 服务 IP=192.168.100.168，客户端=OpenClaw，装完 rh_trade_health 自检。
+按 https://github.com/miaolink/THS_MCP_Quant 文档给我装 rhths-trade MCP 和 Skill，MCP 服务 IP=192.168.100.168，客户端=Codex，装完 rh_trade_health 自检。
 ```
 
 ---
@@ -83,7 +83,7 @@ AI 可自行打开或拉取以下文件（与 [THS_MCP_Quant](https://github.com
 
 - [ ] 配置里已有 **`rhths-trade`**
 - [ ] IP=`127.0.0.1` → 本机 **stdio**；IP=局域网地址 → **`url`** 指向 `:19310`
-- [ ] 已安装 **SKILL.md**（OpenClaw / Hermes 技能目录）
+- [ ] 已安装 **SKILL.md**（WorkBuddy / Hermes 等技能目录）
 - [ ] **`rh_trade_health`** 返回正常
 - [ ] 未擅自开启实盘
 
