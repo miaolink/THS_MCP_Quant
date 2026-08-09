@@ -253,6 +253,26 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | `rh_system_*` | 启动/停止 hexin、xiadan |
 | `rh_autotrading_*` | 本地 JSON 审核配置与队列（**非 MySQL**） |
 
+### 5.6 同花顺金融数据服务（官方标准 API）
+
+重叠的**实时行情 / 交易**请优先用上面的 `rh_market_*` / `rh_trade_*`（本机已登录环境）。研究类数据通过 **同花顺金融数据服务** 的 **官方标准 API** 转发（[fuyao.aicubes.cn](https://fuyao.aicubes.cn/) · [Financial-API](https://github.com/HiThink-Tech/Financial-API)），**不替代下单**。
+
+**Token（用户自备）：** 请到 <https://fuyao.aicubes.cn/admin/> **自行申请** API Key，在 `rhths-gui` → **「API」** 页保存（仅写入本机 `%APPDATA%\RHTHS\settings.json` 与环境变量 `HITHINK_FINANCE_API_KEY`）。RHTHS 不代申请、不托管他人密钥；用量与计费以官方账号为准。
+
+| 工具 | 用途 |
+|------|------|
+| `rh_fuyao_ping` | 探测 Key 是否有效 |
+| `rh_fuyao_meta_search` / `rh_fuyao_meta_list` | 标的名称消歧 / 代码表 |
+| `rh_fuyao_prices_snapshot` / `rh_fuyao_prices_historical` | 云端行情快照 / 日 K（**优先**本地 `rh_market_quote` / `kline`） |
+| `rh_fuyao_adjustment_factors` | 复权事件 |
+| `rh_fuyao_financials_*` | 利润表 / 资产负债表 / 现金流量表 / 财务指标 |
+| `rh_fuyao_valuations_snapshot` | 估值快照（PE/PB 等） |
+| `rh_fuyao_calendar_trading_days` | 近一年交易日历 |
+| `rh_fuyao_index_*` | 指数/板块目录、成分、行情 |
+| `rh_fuyao_fund_*` | 基金资料、持仓、净值、收益、场内行情 |
+| `rh_fuyao_limit_up_*` / `rh_fuyao_hot_*` / `rh_fuyao_dragon_tiger` 等 | 涨停池、热榜、龙虎榜等特色数据 |
+| `rh_fuyao_get` | 通用 `GET /api/*`（高级） |
+
 完整机读列表：[mcp.tools.json](./mcp.tools.json)。**不连接** thsQuant `:19090`，**不提供** MySQL 工具。
 
 ---
@@ -273,6 +293,7 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | 远程 `health` 超时 | 防火墙、IP 错误、交易机未开 MCP HTTP |
 | `LIVE_BLOCKED` | 未开 `RHTHS_ALLOW_LIVE` 或未 `confirm_live` |
 | `FREE_DAILY_LIMIT` | 标准版当日实盘次数已满 |
-| 工具找不到 | 检查路径 / URL、重建 `rhths-mcp.exe` |
+| `FUYAO_ERROR` / 认证失败 | GUI「API」检查 Key；或访问 fuyao 管理页重新创建 |
+| 工具找不到 | 检查路径 / URL、重建 `rhths-mcp.exe`；`rh_fuyao_*` 需新版 MCP |
 | 19310 被占用 | 关闭多余 `rhths-mcp.exe`；本机优先用 stdio，远程才用 HTTP |
 更多排障见 [快速开始.md](./快速开始.md)。CLI 仅本机使用见 [CLI使用说明.md](./CLI使用说明.md)。

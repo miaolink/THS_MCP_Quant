@@ -233,6 +233,26 @@ rhths indicator calc 603919 MACD
 
 ---
 
+## 六点二、同花顺金融数据服务（官方标准 API）
+
+财务 / 估值 / 特色数据等经 RHTHS 转发至 [同花顺金融数据服务](https://fuyao.aicubes.cn/) **官方标准 API**。请先在官网 [自行申请 Token](https://fuyao.aicubes.cn/admin/)，再于 GUI「**API**」页保存（或设置 `HITHINK_FINANCE_API_KEY`）。密钥由你本人保管；**实时行情与下单仍优先本机**。
+
+```powershell
+rhths fuyao ping
+rhths fuyao search 贵州茅台 --limit 5
+rhths fuyao get /api/a-share/valuations/snapshot -q thscodes=600519.SH
+rhths fuyao get /api/a-share/special-data/limit-up-pool -q size=20
+rhths fuyao get /api/a-share/calendar/trading-days
+```
+
+- `ping`：校验 Key  
+- `search`：标的消歧（meta）  
+- `get <path> -q k=v`：任意官方 REST 路径（可重复 `-q`）  
+
+对应 MCP 工具前缀：`rh_fuyao_*`。说明见 [MCP使用说明.md](./MCP使用说明.md) § 5.6。
+
+---
+
 ## 六点五、条件单与策略（进程内 ths_api）
 
 ```powershell
@@ -444,6 +464,8 @@ rhths positions --pretty > pos.txt
 | JSON 乱码 | 使用 `--pretty` 或 `ConvertFrom-Json` |
 
 | 想在另一台电脑用命令行 | 不能远程跑 CLI；请用 [MCP HTTP](./MCP使用说明.md#三局域网--远程安装mcp-http) |
+| `fuyao API key 未配置` | GUI「API」填写并保存；或设 `HITHINK_FINANCE_API_KEY` |
+| `fuyao` 认证失败 | Key 无效/过期，到 <https://fuyao.aicubes.cn/admin/> 重建 |
 
 
 

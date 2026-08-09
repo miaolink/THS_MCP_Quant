@@ -164,6 +164,30 @@
 
 ---
 
+## 五点五、同花顺金融数据服务（官方标准 API）
+
+请先到官网 **自行申请 Token**，并在 GUI「**API**」页保存。**实时行情优先**上一节的 `rh_market_*`；下列走官方标准 API，用于财务 / 估值 / 特色数据等。
+
+| 你可以对 AI 说 | MCP 工具 | 说明 |
+|----------------|----------|------|
+| 「官方数据 Key 通不通？」 | `rh_fuyao_ping` | 探测 fuyao |
+| 「贵州茅台的 thscode 是什么？」 | `rh_fuyao_meta_search` | `q`: 名称或代码 |
+| 「查 600519 估值（PE/PB）」 | `rh_fuyao_valuations_snapshot` | `thscodes`: `600519.SH` |
+| 「茅台最近几期利润表」 | `rh_fuyao_financials_income` | `thscode`: `600519.SH` |
+| 「今天涨停池」 | `rh_fuyao_limit_up_pool` | 可分页 |
+| 「今天龙虎榜」 | `rh_fuyao_dragon_tiger` | `board_type`: `all` / `org` / `hot_money` |
+| 「近一年交易日」 | `rh_fuyao_calendar_trading_days` | 无参数 |
+
+**示例对话：**
+
+> 用户：帮我查贵州茅台当前估值和最近利润表。  
+> AI：先 `rh_fuyao_meta_search`（`q`: `贵州茅台`）确认 `600519.SH`，再 `rh_fuyao_valuations_snapshot` + `rh_fuyao_financials_income`。  
+> （现价若本地可用，仍用 `rh_market_quote`。）
+
+完整列表见 [MCP使用说明.md](./MCP使用说明.md) § 5.6 · [mcp.tools.json](./mcp.tools.json)。
+
+---
+
 ## 六、技术指标
 
 | 你可以对 AI 说 | MCP 工具 | 说明 / 常用参数 |

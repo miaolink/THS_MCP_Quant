@@ -3,7 +3,9 @@ name: rhths-trade
 description: >-
   Operate THS PC trading via RHTHS gateway using MCP tools
   (rhths-mcp) or CLI (rhths.exe). Use for OpenClaw or Hermes Agent with
-  rhths-trade MCP, rh_trade_* tools, rhths CLI, positions, orders, dry-run/live.
+  rhths-trade MCP, rh_trade_*/rh_market_* locally first; rh_fuyao_* for
+  HiThink Financial-API (fuyao) cloud data when local data is missing.
+  Prefer dry-run; require confirm_live for live trades.
 disable-model-invocation: false
 ---
 
@@ -13,9 +15,10 @@ disable-model-invocation: false
 
 **RHTHS** bridges **THS PC** to MCP/CLI via local gateway `http://127.0.0.1:19312`. 
 Primary path: in-process Python **`ths_api`** (same class of usage as strategy scripts), not screen scraping / click automation. 
+Optional cloud data: GUI **API** tab → fuyao Key → MCP `rh_fuyao_*` / CLI `rhths fuyao` (prefer local for overlapping quotes/trades).
 Install RHTHS, deploy extension, log in to THS (strategy/trading Python env must be available), then **MCP** (OpenClaw / Hermes Agent) or **CLI** (scripts).
 
-**Notice:** Third-party helper, **not** an official THS product. User must follow THS / 券商 terms and local law. See [README.md § 使用说明与合规提示](./README.md#使用说明与合规提示).
+**Notice:** MCP/CLI unified entry on your PC. Cloud research data uses **Tonghuashun Financial Data Service** official standard API ([fuyao.aicubes.cn](https://fuyao.aicubes.cn/)); **users apply and keep their own API token**. Trading uses your own logged-in THS account/environment. Follow service terms, 券商 rules, and local law. See [README.md § 使用说明与合规提示](./README.md#使用说明与合规提示).
 
 **AI trading (priority):** OpenClaw or Hermes Agent → MCP `rhths-trade` → `rhths-mcp.exe`. 
 **Quant scripts:** `rhths.exe` on the **same Windows machine** as THS.
@@ -92,8 +95,11 @@ Templates: [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · Full 
 | Condition resume | `rh_condition_resume` | `rhths condition resume` |
 | Py dispatch | `rh_py_call` | `rhths py call --action …` |
 | Quote / K / wencai | `rh_market_*` | `rhths market …` |
+| Cloud finance / special（fuyao） | `rh_fuyao_*` | `rhths fuyao ping` / `search` / `get` |
 | Autotrading review | `rh_autotrading_*` | `rhths autotrading …` |
 | Indicator | `rh_indicator_calc` | `rhths indicator calc CODE MACD` |
+
+**Routing:** prefer local `rh_trade_*` / `rh_market_*` for trading and live quotes. Use `rh_fuyao_*` only for data not available locally (financials, valuations, calendar, limit-up, funds, meta search, etc.). Configure Key in GUI **API** tab (`HITHINK_FINANCE_API_KEY`).
 
 **Not in scope:** MySQL sync, thsQuant `:19090`. Gateway only: `http://127.0.0.1:19312`.
 
