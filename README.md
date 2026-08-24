@@ -250,6 +250,7 @@ RHTHS 通过 `ths_api` 程序化下单时，**必须在 `xiadan.exe` 里完成�
 | [软件功能图.md](./软件功能图.md) | **控制台界面截图**（概览 / 交易 / API / 激活 / 设置 / MCP 等） |
 | [AI交易示例.md](./AI交易示例.md) | **WorkBuddy / Codex / Hermes** 自然语言话术与全工具示例 |
 | [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供首选客户端及 OpenClaw 等加载） |
+| [fuyao-routing.md](./fuyao-routing.md) | 云端 `rh_fuyao_*` 产品侧路由（工作台用 Skill `rhths-fuyao`） |
 | [MCP使用说明.md](./MCP使用说明.md) | **WorkBuddy / Codex / Hermes** 等本机与局域网配置 |
 | [AI自动安装MCP与SKill示例.md](./AI自动安装MCP与SKill示例.md) | **一句话让 AI 自动安装 MCP + Skill**（本机 / 局域网） |
 | [快速开始.md](./快速开始.md) | 安装检查 |

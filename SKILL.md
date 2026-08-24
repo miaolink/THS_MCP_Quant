@@ -94,15 +94,23 @@ Templates: [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · Full 
 | Condition resume | `rh_condition_resume` | `rhths condition resume` |
 | Py dispatch | `rh_py_call` | `rhths py call --action …` |
 | Quote / K / wencai | `rh_market_*` | `rhths market …` |
-| Cloud finance / special（fuyao） | `rh_fuyao_*` | `rhths fuyao ping` / `search` / `get` |
+| Cloud finance / special（fuyao） | `rh_fuyao_*` | `rhths fuyao ping` / `search` / `get`；全量见 [fuyao-routing.md](./fuyao-routing.md) |
 | Autotrading review | `rh_autotrading_*` | `rhths autotrading …` |
 | Indicator | `rh_indicator_calc` | `rhths indicator calc CODE MACD` |
 
-**Routing:** prefer local `rh_trade_*` / `rh_market_*` for trading and live quotes. Use `rh_fuyao_*` only for data not available locally (financials, valuations, calendar, limit-up, funds, meta search, etc.). Configure Key in GUI **API** tab (`HITHINK_FINANCE_API_KEY`).
+**Routing:** prefer local `rh_trade_*` / `rh_market_*` for trading and live quotes. Use `rh_fuyao_*` only for data not available locally (financials, valuations, calendar, auction, limit-up/down/break, funds, meta search, etc.). Configure Key in GUI **API** tab (`HITHINK_FINANCE_API_KEY`). Aligns upstream **2026.08.17.1**.
+
+**Fuyao cloud research:** workbench agents load Skill **`rhths-fuyao`** from the workbench skills dir (`~/.cursor-local-assistant-v2/pool_agent/skills/`), then `CallMcpTool(server=rhths-trade, tool_name=rh_fuyao_*)`. Do **not** open RHTHS repo paths (`Financial-API/`, this folder) at runtime. Product packaging copy for OpenClaw/Hermes: **[fuyao-routing.md](./fuyao-routing.md)** (full intent→tool map).
+
+**Fuyao must-know (2026.08.17.1):**
+- Auction: `rh_fuyao_auction_snapshot` (`thscodes`, `stage=live/final`) / `auction_benchmark` (`date=YYYY-MM-DD`)
+- Pools: history limit-up/down/break → `rh_fuyao_limit_up_pool` / `limit_down_pool` / `limit_break_pool` + `trade_date`/`date_ms`; ladder has **no** date arg; break `open_times` ≠ 连板天数
+- Same-day only: `anomaly_*`; current hot/skyrocket ≠ historical day (history → `hot_stock_history`)
+- Funds: beyond profile/nav/holdings — company/manager/financials/news/offerings/stock|bond history/asset allocation; `fund_type` required; manager/company IDs from profile
 
 **Not in scope:** MySQL sync, thsQuant `:19090`. Gateway only: `http://127.0.0.1:19312`.
 
-Full tool list: [mcp.tools.json](./mcp.tools.json) · CLI: [CLI使用说明.md](./CLI使用说明.md)
+Full tool list: [mcp.tools.json](./mcp.tools.json) · CLI: [CLI使用说明.md](./CLI使用说明.md) · Fuyao: [fuyao-routing.md](./fuyao-routing.md)
 
 ---
 
@@ -164,6 +172,8 @@ rhths buy 600000 --qty 100 --price zxjg --dry-run
 | [快速开始.md](./快速开始.md) | Install checklist |
 | [MCP使用说明.md](./MCP使用说明.md) | OpenClaw / Hermes / LAN HTTP |
 | [CLI使用说明.md](./CLI使用说明.md) | All `rhths` subcommands |
+| [fuyao-routing.md](./fuyao-routing.md) | Product-side `rh_fuyao_*` map (workbench: Skill `rhths-fuyao`) |
+| [SKILL.md](./SKILL.md) | Agent fusion (this file) |
 
 **Online:** https://www.miaolink.cn/rhths/index.php
 

@@ -276,10 +276,15 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 | `rh_fuyao_financials_*` | 利润表 / 资产负债表 / 现金流量表 / 财务指标 |
 | `rh_fuyao_valuations_snapshot` | 估值快照（PE/PB 等） |
 | `rh_fuyao_calendar_trading_days` | 近一年交易日历 |
+| `rh_fuyao_auction_snapshot` / `auction_benchmark` | 集合竞价快照 / 短期强弱基准 |
 | `rh_fuyao_index_*` | 指数/板块目录、成分、行情 |
-| `rh_fuyao_fund_*` | 基金资料、持仓、净值、收益、场内行情 |
-| `rh_fuyao_limit_up_*` / `rh_fuyao_hot_*` / `rh_fuyao_dragon_tiger` 等 | 涨停池、热榜、龙虎榜等特色数据 |
+| `rh_fuyao_fund_*` | 基金资料、持仓、净值、收益、公司/经理、财务、资讯、历史持仓、场内行情 |
+| `rh_fuyao_limit_up_*` / `limit_down_pool` / `limit_break_pool` / `hot_*` / `dragon_tiger` 等 | 涨停/跌停/炸板池、热榜、龙虎榜等特色数据 |
 | `rh_fuyao_get` | 通用 `GET /api/*`（高级） |
+
+**用法与避错：** 工作台用 Skill `rhths-fuyao`（`pool_agent/skills`）；产品侧对照 [fuyao-routing.md](./fuyao-routing.md)。运行时勿依赖开发仓路径。
+
+CLI：`rhths fuyao ping | search | get`。
 
 完整机读列表：[mcp.tools.json](./mcp.tools.json)。**不连接** thsQuant `:19090`，**不提供** MySQL 工具。
 
