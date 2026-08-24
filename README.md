@@ -87,14 +87,15 @@ RHTHS 数据：    AI/脚本 ──► 官方标准 API（fuyao.aicubes.cn，用
 | **联系人** | 李先生 |
 | **手机** | [18670334431](tel:18670334431) |
 | **微信** | 同上号码（**推荐**：添加时请备注「RHTHS」+ 简要问题） |
+| **产品介绍** | [AiTradeGW / RHTHS 介绍单页](https://www.miaolink.cn/rhths/aitradegw.html)（版本对比、服务范围、常见问题） |
 
 <img src="./weixin.jpg" alt="李先生微信二维码（长按或扫码添加）" width="260" />
 
-> 说明：作者收费以**技术服务**为主（咨询 / 远程部署 / 联调），不是出售金融数据包。远程协助**不代客下单或操盘**。交易与资金风险由用户自行承担；不提供代客理财或投资建议。云端数据 Token 请自行向同花顺金融数据服务申请。RHTHS **非**同花顺/券商官方产品。完整条款见本站底部「使用条款与免责声明」。
+> 说明：作者收费以**技术服务**为主（咨询 / 远程部署 / 联调），不是出售金融数据包。远程协助**不代客下单或操盘**。交易与资金风险由用户自行承担；不提供代客理财或投资建议。云端数据 Token 请自行向同花顺金融数据服务申请。RHTHS **非**同花顺/券商官方产品。完整条款见本站底部「使用条款与免责声明」。介绍与选型见 [aitradegw.html](https://www.miaolink.cn/rhths/aitradegw.html)。
 
 ## AI 交易（首选：WorkBuddy · Codex · Hermes Agent）
 
-在 **WorkBuddy**、**Codex** 或 **Hermes Agent** 里配置 RHTHS 的 MCP 服务 **`rhths-trade`** 后，可用自然语言调用本机账户查询与下单通道（默认**模拟下单**，实盘须显式确认）。**AI 输出不构成投资建议**；是否下单由用户决定。也可在 OpenClaw / Claw、Cursor 及其他支持 MCP 的客户端中接入（与购买页 [aitradegw](https://www.miaolink.cn/) 推荐顺序一致）。
+在 **WorkBuddy**、**Codex** 或 **Hermes Agent** 里配置 RHTHS 的 MCP 服务 **`rhths-trade`** 后，可用自然语言调用本机账户查询与下单通道（默认**模拟下单**，实盘须显式确认）。**AI 输出不构成投资建议**；是否下单由用户决定。也可在 OpenClaw / Claw、Cursor 及其他支持 MCP 的客户端中接入（与介绍页 [AiTradeGW](https://www.miaolink.cn/rhths/aitradegw.html) 推荐顺序一致）。
 
 | 你可以对 AI 说 | MCP 背后能力 |
 |----------------|--------------|
