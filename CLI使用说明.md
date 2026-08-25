@@ -253,21 +253,22 @@ rhths fuyao get /api/a-share/calendar/trading-days
 
 ---
 
-## 六点三、同花顺云端自选板块 / 动态板块
+## 六点三、同花顺云端自选股 / 自选板块 / 动态板块
 
-Cookie 在 GUI「**自选板块**」页粘贴保存，或设 `THS_COOKIE` / `RHTHS_THS_COOKIE`。
+Cookie 在 GUI「**自选**」页粘贴保存，或设 `THS_COOKIE` / `RHTHS_THS_COOKIE`。
 
 ```powershell
+rhths watch list
+rhths watch show 自选股
+rhths watch add 自选股 600519.SH
+rhths watch delete 自选股 600519.SH
 rhths favorite list
-rhths favorite show 自选股
-rhths favorite add 自选股 600519.SH
-rhths favorite delete 自选股 600519.SH
+rhths favorite add 买点 000001.SZ
 rhths block list
-rhths block add 买点 000001.SZ 300750
-rhths block delete 买点 000001
+rhths block add 热点 300750
 ```
 
-对应 MCP：`rh_ths_favorite_*`、`rh_ths_block_*`。说明见 [MCP使用说明.md](./MCP使用说明.md) § 5.7。
+对应 MCP：`rh_ths_watch_*`、`rh_ths_favorite_*`、`rh_ths_block_*`。说明见 [MCP使用说明.md](./MCP使用说明.md) § 5.7。
 
 ---
 
@@ -484,7 +485,7 @@ rhths positions --pretty > pos.txt
 | 想在另一台电脑用命令行 | 不能远程跑 CLI；请用 [MCP HTTP](./MCP使用说明.md#三局域网--远程安装mcp-http) |
 | `fuyao API key 未配置` | GUI「API」填写并保存；或设 `HITHINK_FINANCE_API_KEY` |
 | `fuyao` 认证失败 | Key 无效/过期，到 <https://fuyao.aicubes.cn/admin/> 重建 |
-| 同花顺 Cookie 未配置 | GUI「自选板块」粘贴 Cookie 并保存；或设 `THS_COOKIE` |
+| 同花顺 Cookie 未配置 | GUI「自选」粘贴 Cookie 并保存；或设 `THS_COOKIE` |
 
 
 

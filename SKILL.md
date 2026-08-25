@@ -95,7 +95,7 @@ Templates: [mcp.server.rhths-trade.json](./mcp.server.rhths-trade.json) · Full 
 | Py dispatch | `rh_py_call` | `rhths py call --action …` |
 | Quote / K / wencai | `rh_market_*` | `rhths market …` |
 | Cloud finance / special（fuyao） | `rh_fuyao_*` | `rhths fuyao ping` / `search` / `get`；全量见 [fuyao-routing.md](./fuyao-routing.md) |
-| Cloud watchlist / boards | `rh_ths_favorite_*` / `rh_ths_block_*` | `rhths favorite` / `rhths block`；GUI **自选板块** tab Cookie |
+| Cloud watchlist / boards | `rh_ths_watch_*` / `rh_ths_favorite_*` / `rh_ths_block_*` | `rhths watch` / `favorite` / `block`；GUI **自选** tab Cookie |
 | Autotrading review | `rh_autotrading_*` | `rhths autotrading …` |
 | Indicator | `rh_indicator_calc` | `rhths indicator calc CODE MACD` |
 
