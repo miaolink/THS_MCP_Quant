@@ -257,15 +257,22 @@ rhths fuyao get /api/a-share/calendar/trading-days
 
 Cookie 在 GUI「**自选**」页粘贴保存，或设 `THS_COOKIE` / `RHTHS_THS_COOKIE`。
 
+| 层级 | 后端 API | CLI 子命令 |
+|------|----------|------------|
+| **自选股（我的自选）** | `t.10jqka.com.cn` 网页接口 `getSelfStockWithMarket` / `modifySelfStock` | `rhths watch` |
+| **自选板块** | `ugc.10jqka.com.cn` selfgroup，`types=0,1` 中 **type=0** 且无问句（如：买点、持仓股） | `rhths favorite` |
+| **动态板块** | 同上 selfgroup 中 **type=1** 且 `attrs.question` 有问句（如：5日线、今日首板） | `rhths block` |
+
 ```powershell
 rhths watch list
-rhths watch show 自选股
-rhths watch add 自选股 600519.SH
-rhths watch delete 自选股 600519.SH
+rhths watch show 我的自选
+rhths watch add 我的自选 600519.SH
+rhths watch delete 我的自选 600519.SH
 rhths favorite list
+rhths favorite show 买点
 rhths favorite add 买点 000001.SZ
 rhths block list
-rhths block add 热点 300750
+rhths block show 5日线
 ```
 
 对应 MCP：`rh_ths_watch_*`、`rh_ths_favorite_*`、`rh_ths_block_*`。说明见 [MCP使用说明.md](./MCP使用说明.md) § 5.7。

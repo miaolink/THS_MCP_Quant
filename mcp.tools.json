@@ -2,7 +2,7 @@
   "server": "rhths-trade",
   "transport": "stdio",
   "gateway": "http://127.0.0.1:19312",
-  "note": "Independent of thsQuant :19090. No MySQL tools. Prefer local rh_trade_*/rh_market_*; rh_fuyao_* forwards to fuyao.aicubes.cn when API key set in GUI API tab. rh_ths_watch_*/rh_ths_favorite_*/rh_ths_block_* need Tonghuashun Cookie in GUI 自选 tab.",
+  "note": "Independent of thsQuant :19090. No MySQL tools. Prefer local rh_trade_*/rh_market_*; rh_fuyao_* forwards to fuyao.aicubes.cn when API key set in GUI API tab. rh_ths_watch_* uses t.10jqka.com.cn (我的自选); rh_ths_favorite_* / rh_ths_block_* use ugc selfgroup types=0,1 (manual vs question-based). Cookie in GUI 自选 tab.",
   "tools": [
     {"name": "rh_trade_health", "category": "system", "readonly": true},
     {"name": "rh_trade_catalog", "category": "system", "readonly": true},
@@ -120,14 +120,14 @@
     {"name": "rh_fuyao_hot_stock_trend", "category": "fuyao", "readonly": true},
     {"name": "rh_fuyao_dragon_tiger", "category": "fuyao", "readonly": true},
     {"name": "rh_fuyao_get", "category": "fuyao", "readonly": true, "params": {"path": "string", "query": "object?"}},
-    {"name": "rh_ths_watch_list", "category": "ths-ugc", "readonly": true, "params": {"group": "string?"}},
-    {"name": "rh_ths_watch_add", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
-    {"name": "rh_ths_watch_delete", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
-    {"name": "rh_ths_favorite_list", "category": "ths-ugc", "readonly": true, "params": {"group": "string?"}},
-    {"name": "rh_ths_favorite_add", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
-    {"name": "rh_ths_favorite_delete", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
-    {"name": "rh_ths_block_list", "category": "ths-ugc", "readonly": true, "params": {"group": "string?"}},
-    {"name": "rh_ths_block_add", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
-    {"name": "rh_ths_block_delete", "category": "ths-ugc", "write": true, "params": {"group": "string", "code": "string?", "codes": "string|array?"}}
+    {"name": "rh_ths_watch_list", "category": "ths-ugc", "readonly": true, "note": "我的自选 via t.10jqka.com.cn", "params": {"group": "string?"}},
+    {"name": "rh_ths_watch_add", "category": "ths-ugc", "write": true, "note": "group optional, 我的自选", "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
+    {"name": "rh_ths_watch_delete", "category": "ths-ugc", "write": true, "note": "group optional, 我的自选", "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
+    {"name": "rh_ths_favorite_list", "category": "ths-ugc", "readonly": true, "note": "selfgroup type=0 manual boards", "params": {"group": "string?"}},
+    {"name": "rh_ths_favorite_add", "category": "ths-ugc", "write": true, "note": "e.g. group=买点", "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
+    {"name": "rh_ths_favorite_delete", "category": "ths-ugc", "write": true, "note": "e.g. group=买点", "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
+    {"name": "rh_ths_block_list", "category": "ths-ugc", "readonly": true, "note": "selfgroup type=1 question-based", "params": {"group": "string?"}},
+    {"name": "rh_ths_block_add", "category": "ths-ugc", "write": true, "note": "e.g. group=5日线", "params": {"group": "string", "code": "string?", "codes": "string|array?"}},
+    {"name": "rh_ths_block_delete", "category": "ths-ugc", "write": true, "note": "e.g. group=5日线", "params": {"group": "string", "code": "string?", "codes": "string|array?"}}
   ]
 }

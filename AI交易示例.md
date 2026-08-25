@@ -20,7 +20,7 @@
 | 「官方数据 Key 通不通？」 | `rh_fuyao_ping` |
 | 「我的同花顺自选股里有哪些？」 | `rh_ths_watch_list` |
 | 「自选板块有哪些？」 | `rh_ths_favorite_list` |
-| 「动态板块「买点」里有哪些票？」 | `rh_ths_block_list`（`group`=`买点`） |
+| 「动态板块「5日线」里有哪些票？」 | `rh_ths_block_list`（`group`=`5日线`） |
 
 ---
 
@@ -173,17 +173,18 @@
 
 ## 五点五、同花顺云端自选股 / 自选板块 / 动态板块
 
-> 需 GUI「自选」页粘贴 Cookie 并保存（会重启 MCP）。不依赖本机 hexin。代码：`600519.SH` 或 6 位代码。`types=0,1,2`。
+> 需 GUI「自选」页粘贴 Cookie 并保存（会重启 MCP）。不依赖本机 hexin。代码：`600519.SH` 或 6 位代码。  
+> **自选股**走 `t.10jqka.com.cn`；**自选板块 / 动态板块**走 `ugc.10jqka.com.cn` selfgroup（`types=0,1`），以 `type` 与 `attrs.question` 区分。
 
 | 你可以对 AI 说 | MCP 工具 | 参数要点 |
 |----------------|----------|----------|
-| 「列出自选股」 | `rh_ths_watch_list` | 通常 `group`=`自选股` |
-| 「把 600519 加到自选股」 | `rh_ths_watch_add` | `group`=`自选股`；`code`=`600519.SH` |
+| 「列出自选股」 | `rh_ths_watch_list` | 返回「我的自选」；`group` 可省略 |
+| 「把 600519 加到自选股」 | `rh_ths_watch_add` | `group`=`我的自选`（可省略）；`code`=`600519.SH` |
 | 「从自选股删掉 600519」 | `rh_ths_watch_delete` | 同上 |
-| 「列出自选板块」 | `rh_ths_favorite_list` | 可选 `group` 只看一个板块 |
-| 「把 000001 加到买点板块」 | `rh_ths_favorite_add` | `group`=`买点`（type=1 自选板块） |
-| 「有哪些动态板块？」 | `rh_ths_block_list` | type=2 |
-| 「把 000001 加到热点动态板块」 | `rh_ths_block_add` | `group`=`热点` |
+| 「列出自选板块」 | `rh_ths_favorite_list` | 可选 `group` 只看一个板块（如 `买点`） |
+| 「把 000001 加到买点板块」 | `rh_ths_favorite_add` | `group`=`买点`（type=0 手动自选板块） |
+| 「有哪些动态板块？」 | `rh_ths_block_list` | type=1 且含问句，如 `5日线`、`今日首板` |
+| 「看看 5日线 动态板块有哪些票」 | `rh_ths_block_list` | `group`=`5日线` |
 
 **示例对话：**
 

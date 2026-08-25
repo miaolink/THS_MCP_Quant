@@ -288,13 +288,21 @@ CLI：`rhths fuyao ping | search | get`。
 
 ### 5.7 同花顺云端自选股 / 自选板块 / 动态板块
 
-不依赖本机 hexin。Cookie 在 `rhths-gui` → **「自选」** 页手动粘贴并保存（`%APPDATA%\RHTHS\settings.json` 的 `ths_cookie`，或环境变量 `THS_COOKIE` / `RHTHS_THS_COOKIE`）。保存后需重启 MCP 进程。查询接口 `types=0,1,2`：`0` 自选股、`1` 自选板块、`2` 动态板块。
+不依赖本机 hexin。Cookie 在 `rhths-gui` → **「自选」** 页手动粘贴并保存（`%APPDATA%\RHTHS\settings.json` 的 `ths_cookie`，或环境变量 `THS_COOKIE` / `RHTHS_THS_COOKIE`）。保存后需重启 MCP 进程。
+
+**三层与后端（已按网页抓包 + selfgroup 实测对齐）：**
+
+| 层级 | 数据来源 | 识别方式 |
+|------|----------|----------|
+| **自选股** | `t.10jqka.com.cn/newcircle/group/getSelfStockWithMarket` | 虚拟分组「我的自选」，**不在** selfgroup 里 |
+| **自选板块** | `ugc.10jqka.com.cn` selfgroup `types=0,1` | **type=0**，`attrs.question` 为空（手动分组，如买点、持仓股） |
+| **动态板块** | 同上 selfgroup | **type=1**，`attrs.question` 含问句选股条件（如 5日线、今日首板） |
 
 | 工具 | 用途 |
 |------|------|
-| `rh_ths_watch_list` / `add` / `delete` | 自选股（type=0）。`group` 通常为「自选股」 |
-| `rh_ths_favorite_list` / `add` / `delete` | 自选板块（type=1） |
-| `rh_ths_block_list` / `add` / `delete` | 动态板块（type=2） |
+| `rh_ths_watch_list` / `add` / `delete` | 「我的自选」。`group` 可省略或填「我的自选」 |
+| `rh_ths_favorite_list` / `add` / `delete` | 自选板块（type=0 手动分组）。`group`=板块名或 id，如 `买点` |
+| `rh_ths_block_list` / `add` / `delete` | 动态板块（type=1 问句板块）。`group`=板块名或 id，如 `5日线` |
 
 代码格式：`600519.SH` 或 6 位代码（按首位推断市场）。CLI：`rhths watch` / `favorite` / `block`。
 
