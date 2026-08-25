@@ -248,7 +248,7 @@ RHTHS 通过 `ths_api` 程序化下单时，**必须在 `xiadan.exe` 里完成�
 
 | 文档 | 内容 |
 |------|------|
-| [软件功能图.md](./软件功能图.md) | **控制台界面截图**（概览 / 交易 / API / 自选 / 激活 / 设置 / MCP 等） |
+| [软件功能图.md](./软件功能图.md) | **控制台界面截图**（概览 / 交易 / API / 自选板块 / 激活 / 设置 / MCP 等） |
 | [AI交易示例.md](./AI交易示例.md) | **WorkBuddy / Codex / Hermes** 自然语言话术与全工具示例 |
 | [SKILL.md](./SKILL.md) | **Agent 融合指南**（MCP + CLI，供首选客户端及 OpenClaw 等加载） |
 | [fuyao-routing.md](./fuyao-routing.md) | 云端 `rh_fuyao_*` 产品侧路由（工作台用 Skill `rhths-fuyao`） |

@@ -2,7 +2,7 @@
   "server": "rhths-trade",
   "transport": "stdio",
   "gateway": "http://127.0.0.1:19312",
-  "note": "Independent of thsQuant :19090. No MySQL tools. Prefer local rh_trade_*/rh_market_*; rh_fuyao_* forwards to fuyao.aicubes.cn when API key set in GUI API tab. rh_ths_favorite_*/rh_ths_block_* need Tonghuashun Cookie in GUI 自选 tab.",
+  "note": "Independent of thsQuant :19090. No MySQL tools. Prefer local rh_trade_*/rh_market_*; rh_fuyao_* forwards to fuyao.aicubes.cn when API key set in GUI API tab. rh_ths_favorite_*/rh_ths_block_* need Tonghuashun Cookie in GUI 自选板块 tab.",
   "tools": [
     {"name": "rh_trade_health", "category": "system", "readonly": true},
     {"name": "rh_trade_catalog", "category": "system", "readonly": true},

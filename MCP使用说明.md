@@ -286,15 +286,15 @@ Invoke-RestMethod http://192.168.1.100:19310/health
 
 CLI：`rhths fuyao ping | search | get`。
 
-### 5.7 同花顺云端自选 / 动态板块
+### 5.7 同花顺云端自选板块 / 动态板块
 
-不依赖本机 hexin。Cookie 在 `rhths-gui` → **「自选」** 页手动粘贴并保存（`%APPDATA%\RHTHS\settings.json` 的 `ths_cookie`，或环境变量 `THS_COOKIE` / `RHTHS_THS_COOKIE`）。保存后需重启 MCP 进程。
+不依赖本机 hexin。Cookie 在 `rhths-gui` → **「自选板块」** 页手动粘贴并保存（`%APPDATA%\RHTHS\settings.json` 的 `ths_cookie`，或环境变量 `THS_COOKIE` / `RHTHS_THS_COOKIE`）。保存后需重启 MCP 进程。
 
 | 工具 | 用途 |
 |------|------|
-| `rh_ths_favorite_list` | 列出自选分组；可选 `group` 只看一组 |
-| `rh_ths_favorite_add` / `rh_ths_favorite_delete` | 自选分组增删股票。`group` 必填；`code` 或 `codes` |
-| `rh_ths_block_list` | 列出动态板块/自定义分组 |
+| `rh_ths_favorite_list` | 列出自选板块；可选 `group` 只看一个板块 |
+| `rh_ths_favorite_add` / `rh_ths_favorite_delete` | 自选板块增删股票。`group` 必填；`code` 或 `codes` |
+| `rh_ths_block_list` | 列出动态板块 |
 | `rh_ths_block_add` / `rh_ths_block_delete` | 板块增删股票 |
 
 代码格式：`600519.SH` 或 6 位代码（按首位推断市场）。CLI：`rhths favorite list|show|add|delete`，`rhths block …`。
@@ -320,7 +320,7 @@ CLI：`rhths fuyao ping | search | get`。
 | `LIVE_BLOCKED` | 未开 `RHTHS_ALLOW_LIVE` 或未 `confirm_live` |
 | `FREE_DAILY_LIMIT` | 标准版当日实盘次数已满 |
 | `FUYAO_ERROR` / 认证失败 | GUI「API」检查 Key；或访问 fuyao 管理页重新创建 |
-| `THS_UGC_ERROR` / Cookie 未配置 | GUI「自选」填写 Cookie 并保存；然后重启 MCP |
+| `THS_UGC_ERROR` / Cookie 未配置 | GUI「自选板块」填写 Cookie 并保存；然后重启 MCP |
 | 工具找不到 | 检查路径 / URL、重建 `rhths-mcp.exe`；`rh_fuyao_*` 需新版 MCP |
 | 19310 被占用 | 关闭多余 `rhths-mcp.exe`；本机优先用 stdio，远程才用 HTTP |
 更多排障见 [快速开始.md](./快速开始.md)。CLI 仅本机使用见 [CLI使用说明.md](./CLI使用说明.md)。
