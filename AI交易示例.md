@@ -5,7 +5,7 @@
 - **默认模拟下单**（`dry_run` / 模式 `simulate`），不会真实成交。
 - **实盘**须环境变量 `RHTHS_ALLOW_LIVE=1`，且每笔写操作带 **`confirm_live: true`**，风险自负。
 - **云端研究**（涨停池/财报/估值/基金等）：到 [fuyao.aicubes.cn](https://fuyao.aicubes.cn/admin/) **自行申请 Token**，在 `rhths-gui` → **「API」** 页保存。
-- **能力分工：** 实时行情/交易 → `rh_market_*` / `rh_trade_*`；云端特色与财务 → `rh_fuyao_*`。工作台可加载 Skill `rhths` / `rhths-fuyao`。
+- **能力分工：** 实时行情/交易 → `rh_market_*` / `rh_trade_*`；云端特色与财务 → `rh_fuyao_*`；云端自选/动态板块 → `rh_ths_favorite_*` / `rh_ths_block_*`（GUI「自选」页 Cookie）。
 - 配置见 [MCP使用说明.md](./MCP使用说明.md)、[SKILL.md](./SKILL.md)、[fuyao-routing.md](./fuyao-routing.md)。
 
 ---
@@ -18,6 +18,8 @@
 | 「hexin 和 xiadan 在跑吗？」 | `rh_system_status` |
 | 「现在是模拟还是实盘模式？」 | `rh_trade_mode_get` |
 | 「官方数据 Key 通不通？」 | `rh_fuyao_ping` |
+| 「我的同花顺自选里有哪些？」 | `rh_ths_favorite_list` |
+| 「动态板块「买点」里有哪些票？」 | `rh_ths_block_list`（`group`=`买点`） |
 
 ---
 
@@ -165,6 +167,26 @@
 > AI：`rh_market_kline`（`period`: `1440`，`length`: `20`）+ `rh_market_depth`。
 
 **订阅类（高级，日常分析可不走）：** `reg_quote` / `reg_kline` → 循环 `wait_update` → `unreg_*`。
+
+---
+
+## 五点五、同花顺云端自选 / 动态板块
+
+> 需 GUI「自选」页粘贴 Cookie 并保存（会重启 MCP）。不依赖本机 hexin。代码：`600519.SH` 或 6 位代码。
+
+| 你可以对 AI 说 | MCP 工具 | 参数要点 |
+|----------------|----------|----------|
+| 「列出自选分组」 | `rh_ths_favorite_list` | 可选 `group` 只看一组 |
+| 「把 600519 加到自选股」 | `rh_ths_favorite_add` | `group`=`自选股`；`code`=`600519.SH` |
+| 「从自选股删掉 600519」 | `rh_ths_favorite_delete` | 同上 |
+| 「有哪些动态板块？」 | `rh_ths_block_list` | 返回自定义分组/板块 |
+| 「把 000001 加到买点板块」 | `rh_ths_block_add` | `group`=`买点`；`codes` 可多只 |
+| 「从买点板块删掉 000001」 | `rh_ths_block_delete` | 同上 |
+
+**示例对话：**
+
+> 用户：看看我同花顺自选和「买点」板块里有哪些票，把 600519.SH 加进买点。  
+> AI：`rh_ths_favorite_list` → `rh_ths_block_list`（`group`: `买点`）→ `rh_ths_block_add`（`group`: `买点`，`code`: `600519.SH`）。
 
 ---
 
@@ -451,6 +473,7 @@
 | 条件单 | `rh_condition_*`、`rh_py_call` |
 | 自动交易 | `rh_autotrading_*` |
 | **云端 fuyao** | `rh_fuyao_ping`、`meta_*`、`prices_*`、`adjustment_factors`、`financials_*`、`valuations_snapshot`、`calendar_trading_days`、`auction_*`、`limit_up_*`、`limit_down_pool`、`limit_break_pool`、`anomaly_*`、`skyrocket_list`、`hot_stock_*`、`dragon_tiger`、`index_*`、`fund_*`、`rh_fuyao_get` |
+| **云端自选/板块** | `rh_ths_favorite_list` / `add` / `delete`；`rh_ths_block_list` / `add` / `delete` |
 
 机读摘要：[mcp.tools.json](./mcp.tools.json) · 云端路由：[fuyao-routing.md](./fuyao-routing.md)
 
@@ -469,6 +492,7 @@
 | 涨停池周末为空 | 传具体交易日；或属非交易日正常空 |
 | 异动历史为空 / `skipped` | 异动仅当日；用涨停池 `limit_up_reason` |
 | `FUYAO_ERROR` / Key 无效 | GUI「API」保存 Token；`rh_fuyao_ping` |
+| `THS_UGC_ERROR` / Cookie 未配置 | GUI「自选」粘贴 Cookie 并保存（会重启 MCP） |
 | 基金报类型错误 | `meta_search` 后设对 `fund_type` |
 | `account_daily` 无数据 | 日期须 **`YYYYMMDD`** |
 | autotrading 列表为空 | 看 `execution_mode`；数据在 `PythonLog\rhths\data\` |
